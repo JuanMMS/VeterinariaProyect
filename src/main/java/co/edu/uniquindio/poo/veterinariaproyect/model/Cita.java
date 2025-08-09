@@ -20,4 +20,5 @@ public class Cita {
         this.propietario = propietario;
         this.personalApoyo = personalApoyo;
     }
+
 }
