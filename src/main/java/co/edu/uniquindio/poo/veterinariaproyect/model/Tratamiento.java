@@ -1,4 +1,4 @@
 package co.edu.uniquindio.poo.veterinariaproyect.model;
 
-public class Tratamiento {
+public record Tratamiento(String nombre, String duracion, String medicamento) {
 }
