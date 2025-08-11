@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.veterinariaproyect.model;
 
 public class Consulta {
+
     private String fecha;
     private String iD;
     private String hora;
@@ -58,4 +59,6 @@ public class Consulta {
     public void setCita(Cita cita) {
         this.cita = cita;
     }
+=======
+
 }
