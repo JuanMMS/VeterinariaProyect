@@ -86,5 +86,5 @@ public class Mascota {
     public void setPropietario(Propietario propietario) {
         this.propietario = propietario;
     }
-    
+
 }
