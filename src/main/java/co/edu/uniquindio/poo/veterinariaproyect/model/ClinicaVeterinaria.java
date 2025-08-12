@@ -11,6 +11,7 @@ public class ClinicaVeterinaria {
     private List<Mascota> listMascotas;
     private List<Consulta> listConsultas;
     private List<Cita> listCitas;
+    private List<Tratamiento> listTratamientos;
 
 
     public ClinicaVeterinaria(String nombre, String ID) {
@@ -20,9 +21,16 @@ public class ClinicaVeterinaria {
         this.listMascotas= new ArrayList<>();
         this.listConsultas= new ArrayList<>();
         this.listCitas= new ArrayList<>();
+        this.listTratamientos= new ArrayList<>();
 
     }
 
+    /*
+    Metodo para agregar tratamientos desde la clase ClinicaVeterinaria
+     */
+    public void agregarTratamiento(Tratamiento tratamiento) {
+        listTratamientos.add(tratamiento);
+    }
 
     /*
     Metodo para agregar Personas desde la clase ClinicaVeterinaria
@@ -137,8 +145,23 @@ public class ClinicaVeterinaria {
     }
 
     /*
-    Metodo eliminar persona desde la clase ClinicaVeterinaria
+    Metodos getter y setter de la clase Clinica Veterinaria
      */
+
+    public List<Tratamiento> getListTratamientos() {
+        return listTratamientos;
+    }
+
+    /*
+    Metodos getter y setter de la clase Clinica Veterinaria
+     */
+    public void setListTratamientos(List<Tratamiento> listTratamientos) {
+        this.listTratamientos = listTratamientos;
+    }
+
+    /*
+        Metodo eliminar persona desde la clase ClinicaVeterinaria
+         */
     public void eliminarPersona(Persona persona) {
         listPersonas.remove(persona);
     }
@@ -163,5 +186,14 @@ public class ClinicaVeterinaria {
     public void eliminarCitas(Cita cita) {
         listCitas.remove(cita);
     }
+
+    /*
+    Metodo eliminar tratamiento desde la clase ClinicaVeterinaria
+     */
+    public void eliminarTratamiento(Tratamiento tratamiento) {
+        listTratamientos.remove(tratamiento);
+    }
+
+
 
 }
