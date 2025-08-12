@@ -25,7 +25,6 @@ public class Propietario extends Persona {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-=======
 
 
 }

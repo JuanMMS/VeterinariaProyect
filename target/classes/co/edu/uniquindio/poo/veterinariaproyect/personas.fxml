@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.controller.RegistrosController">
+   <children>
+      <Pane layoutX="26.0" layoutY="24.0" prefHeight="368.0" prefWidth="555.0">
+         <children>
+            <ListView fx:id="ListaPersonas" layoutY="46.0" prefHeight="308.0" prefWidth="256.0" />
+            <Label layoutX="14.0" layoutY="-26.0" prefHeight="81.0" prefWidth="317.0" text="Menú de personas">
+               <font>
+                  <Font name="Wingdings 2" size="28.0" />
+               </font>
+            </Label>
+            <ToolBar layoutX="271.0" layoutY="200.0" prefHeight="40.0" prefWidth="262.0">
+               <items>
+                  <Button fx:id="BotonAgregar" mnemonicParsing="false" text="Agregar" />
+                  <Button fx:id="BotonEliminar" mnemonicParsing="false" text="Eliminar" />
+                  <Button fx:id="BotonLeer" mnemonicParsing="false" text="Leer" />
+                  <Button fx:id="BotonModificar" mnemonicParsing="false" text="Modificar" />
+               </items>
+            </ToolBar>
+            <ChoiceBox id="SeleccionadorTipoPersona" fx:id="SelectorTIpoPersona" layoutX="279.0" layoutY="278.0" prefWidth="150.0" />
+            <TextField fx:id="EspacioNombre" layoutX="354.0" layoutY="69.0" prefHeight="25.0" prefWidth="178.0" />
+            <Label layoutX="291.0" layoutY="73.0" text="Nombre:" />
+            <Label layoutX="307.0" layoutY="107.0" text="ID:" />
+            <TextField fx:id="EspacioID" layoutX="354.0" layoutY="103.0" prefHeight="25.0" prefWidth="178.0" />
+            <Label layoutX="291.0" layoutY="139.0" text="Telefono" />
+            <TextField fx:id="EspacioTelefono" layoutX="354.0" layoutY="135.0" prefHeight="25.0" prefWidth="178.0" />
+            <Label layoutX="276.0" layoutY="261.0" text="Seleccione el tipo de persona" />
+            <Button fx:id="BotobCerrar" layoutX="521.0" layoutY="-14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" text="X" textOverrun="WORD_ELLIPSIS">
+               <font>
+                  <Font name="Fira Code Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
