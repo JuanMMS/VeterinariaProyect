@@ -30,7 +30,11 @@
             <Label layoutX="291.0" layoutY="139.0" text="Telefono" />
             <TextField fx:id="EspacioTelefono" layoutX="354.0" layoutY="135.0" prefHeight="25.0" prefWidth="178.0" />
             <Label layoutX="276.0" layoutY="261.0" text="Seleccione el tipo de persona" />
+<<<<<<< HEAD
             <Button fx:id="BotonCerrar" layoutX="521.0" layoutY="-14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" text="X" textOverrun="WORD_ELLIPSIS">
+=======
+            <Button fx:id="BotobCerrar" layoutX="521.0" layoutY="-14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" text="X" textOverrun="WORD_ELLIPSIS">
+>>>>>>> 9e11a08b1019c12c60a7d3496df5c788ce783612
                <font>
                   <Font name="Fira Code Bold" size="12.0" />
                </font>
