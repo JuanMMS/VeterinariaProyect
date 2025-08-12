@@ -27,7 +27,7 @@ public class Consulta {
         this.fecha = fecha;
     }
 
-    public String getiD() {
+    public String getID() {
         return iD;
     }
 

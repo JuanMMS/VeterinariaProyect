@@ -2,34 +2,33 @@ package co.edu.uniquindio.poo.veterinariaproyect.viewController;
 
 import co.edu.uniquindio.poo.veterinariaproyect.controller.MascotaController;
 import co.edu.uniquindio.poo.veterinariaproyect.model.Mascota;
-import co.edu.uniquindio.poo.veterinariaproyect.App;
-import javafx.application.Application;
+import co.edu.uniquindio.poo.veterinariaproyect.model.Propietario;
+import co.edu.uniquindio.poo.veterinariaproyect.model.TipoEspecie;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MascotaViewController {
 
-    @FXML private TableView<Mascota> tableMascotas;
+    @FXML private TableView<Mascota> tablaMascotas;
     @FXML private TableColumn<Mascota, String> colNombre;
-    @FXML private TableColumn<Mascota, String> colEspecie;
-    @FXML private TableColumn<Mascota, String> colRaza;
+    @FXML private TableColumn<Mascota, Integer> colEdad;
+    @FXML private TableColumn<Mascota, String> colIdVeterinario;
+    @FXML private TableColumn<Mascota, TipoEspecie> colEspecie;
+    @FXML private TableColumn<Mascota, Propietario> colPropietario;
 
-    @FXML private TextField txtNombre;
-    @FXML private TextField txtEspecie;
-    @FXML private TextField txtRaza;
-
-    @FXML private Button btnAgregar;
-    @FXML private Button btnEliminar;
-    @FXML private Button btnActualizar;
+    @FXML private TextField nombreField;
+    @FXML private Spinner<Integer> edadSpinner;
+    @FXML private TextField idVeterinarioField;
+    @FXML private ComboBox<TipoEspecie> especieCombo;
+    @FXML private ComboBox<Propietario> propietarioCombo;
 
     private MascotaController mascotaController;
 
@@ -37,42 +36,106 @@ public class MascotaViewController {
     public void initialize() {
         mascotaController = new MascotaController();
 
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colEspecie.setCellValueFactory(new PropertyValueFactory<>("especie"));
-        colRaza.setCellValueFactory(new PropertyValueFactory<>("raza"));
+        // Configurar el Spinner de edad
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 1);
+        edadSpinner.setValueFactory(valueFactory);
 
-        tableMascotas.setItems(mascotaController.obtenerMascotas());
+        // Llenar los ComboBox con datos
+        especieCombo.setItems(mascotaController.obtenerEspecies());
+        propietarioCombo.setItems(mascotaController.obtenerPropietarios());
+
+        // Configurar las columnas de la tabla
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        colEdad.setCellValueFactory(new PropertyValueFactory<>("edad"));
+        colIdVeterinario.setCellValueFactory(new PropertyValueFactory<>("IDVeterinario"));
+        colEspecie.setCellValueFactory(new PropertyValueFactory<>("tipoEspecie"));
+        colPropietario.setCellValueFactory(new PropertyValueFactory<>("propietario"));
+
+        tablaMascotas.setItems(mascotaController.obtenerMascotas());
     }
 
     @FXML
     private void agregarMascota() {
-        Mascota mascota = new Mascota(txtNombre.getText(), txtEspecie.getText(), txtRaza.getText());
+        String nombre = nombreField.getText();
+        String idVeterinario = idVeterinarioField.getText();
+        TipoEspecie tipoEspecie = especieCombo.getValue();
+        Propietario propietario = propietarioCombo.getValue();
+        int edad = edadSpinner.getValue();
+
+        if (nombre.isEmpty() || idVeterinario.isEmpty() || tipoEspecie == null || propietario == null) {
+            mostrarAlerta("Campos Incompletos", "Por favor, complete todos los campos.");
+            return;
+        }
+
+        Mascota mascota = new Mascota(nombre, edad, idVeterinario, tipoEspecie, propietario);
         mascotaController.agregarMascota(mascota);
-        tableMascotas.setItems(mascotaController.obtenerMascotas());
+        tablaMascotas.setItems(mascotaController.obtenerMascotas());
+        limpiarCampos();
     }
 
     @FXML
     private void eliminarMascota() {
-        Mascota mascota = tableMascotas.getSelectionModel().getSelectedItem();
+        Mascota mascota = tablaMascotas.getSelectionModel().getSelectedItem();
         if (mascota != null) {
             mascotaController.eliminarMascota(mascota);
-            tableMascotas.setItems(mascotaController.obtenerMascotas());
+            tablaMascotas.setItems(mascotaController.obtenerMascotas());
+        } else {
+            mostrarAlerta("No hay selección", "Seleccione una mascota de la tabla para eliminar.");
         }
     }
 
     @FXML
     private void actualizarMascota() {
-        Mascota mascota = tableMascotas.getSelectionModel().getSelectedItem();
+        Mascota mascota = tablaMascotas.getSelectionModel().getSelectedItem();
         if (mascota != null) {
-            mascota.setNombre(txtNombre.getText());
-            //mascota.setEspecie(txtEspecie.getText());
-            //mascota.setRaza(txtRaza.getText());
-            //mascotaController.actualizarMascota(mascota);
-            tableMascotas.setItems(mascotaController.obtenerMascotas());
+            String nombre = nombreField.getText();
+            String idVeterinario = idVeterinarioField.getText();
+            TipoEspecie tipoEspecie = especieCombo.getValue();
+            Propietario propietario = propietarioCombo.getValue();
+            int edad = edadSpinner.getValue();
+
+            if (nombre.isEmpty() || idVeterinario.isEmpty() || tipoEspecie == null || propietario == null) {
+                mostrarAlerta("Campos Incompletos", "Por favor, complete todos los campos para actualizar.");
+                return;
+            }
+
+            mascota.setNombre(nombre);
+            mascota.setEdad(edad);
+            mascota.setIDVeterinario(idVeterinario);
+            mascota.setTipoEspecie(tipoEspecie);
+            mascota.setPropietario(propietario);
+            // Si tienes un método de actualizar en el controlador, llámalo aquí.
+            // mascotaController.actualizarMascota(mascota);
+            tablaMascotas.refresh(); // Refresca la tabla para ver los cambios
+            limpiarCampos();
+        } else {
+            mostrarAlerta("No hay selección", "Seleccione una mascota de la tabla para actualizar.");
         }
     }
+
+    @FXML
     public void volverMenu(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/veterinariaproyect/fxml/menu.fxml"));
         Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Menú Principal");
+        stage.show();
+    }
+
+    private void limpiarCampos() {
+        nombreField.clear();
+        idVeterinarioField.clear();
+        edadSpinner.getValueFactory().setValue(1);
+        especieCombo.getSelectionModel().clearSelection();
+        propietarioCombo.getSelectionModel().clearSelection();
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }

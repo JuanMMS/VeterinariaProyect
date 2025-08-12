@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="co.edu.uniquindio.poo.veterinariaproyect.controller.MenuController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.MenuViewController"
+      spacing="15" alignment="TOP_CENTER" padding="20">
 
-</AnchorPane>
+    <Label text="Bienvenido" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Mascotas" onAction="#onMascotasClick" />
+        <Button text="Citas" onAction="#onCitasClick" />
+        <Button text="Personal" onAction="#onPersonalClick" />
+    </HBox>
+
+    <TableView fx:id="tablaCitas" prefHeight="300" prefWidth="500">
+        <columns>
+            <TableColumn fx:id="columnaFecha" text="Fecha" prefWidth="150" />
+            <TableColumn fx:id="columnaHora" text="Hora" prefWidth="150" />
+            <TableColumn fx:id="columnaDescripcion" text="Descripción" prefWidth="200" />
+        </columns>
+    </TableView>
+
+</VBox>

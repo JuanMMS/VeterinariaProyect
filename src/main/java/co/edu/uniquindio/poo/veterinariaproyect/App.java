@@ -4,10 +4,12 @@ import co.edu.uniquindio.poo.veterinariaproyect.controller.MenuController;
 import co.edu.uniquindio.poo.veterinariaproyect.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +36,33 @@ public class App extends Application {
         stage.show();
     }
 
+
+
+    //Metodo para cambiar de escena
     public static void cambiarEscena(String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
         Scene scene = new Scene(loader.load());
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
+    }
+
+
+    // Método para cerrar programa
+    public static void cerrarPrograma() {
+        System.exit(0);
+    }
+
+    // Método para volver atrás a una escena específica, con evento para obtener Stage
+    public static void volverAtras(ActionEvent event, String fxml) {
+        try {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Parent root = FXMLLoader.load(App.class.getResource(fxml));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initData() {
@@ -112,4 +136,5 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+
 }

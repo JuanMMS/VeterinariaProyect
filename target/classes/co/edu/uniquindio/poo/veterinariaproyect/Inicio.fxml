@@ -46,4 +46,5 @@
          <Font name="Bell MT" size="35.0" />
       </font>
    </Label>
+   <Button fx:id="cerrar" layoutX="555.0" layoutY="14.0" mnemonicParsing="false" onAction="#cerrarPrograma" prefHeight="28.0" prefWidth="31.0" text="X" />
 </Pane>
