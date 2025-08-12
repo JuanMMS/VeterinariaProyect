@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <effect>
+      <Lighting bumpInput="$null">
+         <light>
+            <Light.Distant>
+               <color>
+                  <Color green="1.0" blue="0.998275637626648"/>
+               </color>
+            </Light.Distant>
+         </light>
+      </Lighting>
+   </effect>
+   <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="203.0" layoutY="263.0"
+           mnemonicParsing="false" prefHeight="71.0" prefWidth="194.0" text="Iniciar Sesión" textAlignment="CENTER"
+           textOverrun="LEADING_ELLIPSIS" underline="true">
+      <font>
+         <Font size="25.0"/>
+      </font>
+      <effect>
+         <ColorAdjust brightness="-0.04" contrast="0.81" hue="-0.2" saturation="1.0">
+            <input>
+               <Lighting>
+                  <bumpInput>
+                     <Shadow>
+                        <color>
+                           <Color red="1.0" green="1.0" blue="1.0"/>
+                        </color>
+                     </Shadow>
+                  </bumpInput>
+                  <light>
+                     <Light.Distant/>
+                  </light>
+               </Lighting>
+            </input>
+         </ColorAdjust>
+      </effect>
+   </Button>
+   <Label layoutX="24.0" layoutY="30.0" prefHeight="43.0" prefWidth="556.0" text="Bienvenidos a la Clinica San Alberto">
+      <font>
+         <Font name="Bell MT" size="35.0"/>
+      </font>
+   </Label>
+</Pane>

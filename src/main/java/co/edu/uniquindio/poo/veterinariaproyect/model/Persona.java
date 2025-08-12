@@ -13,6 +13,7 @@ public class Persona {
         this.telefono = telefono;
     }
 
+
     /*
     Metodos getter and setter de la clase Persona
      */
@@ -54,4 +55,6 @@ public class Persona {
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
+=======
+
 }
