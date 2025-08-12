@@ -12,4 +12,46 @@ public class Persona {
         this.ID = ID;
         this.telefono = telefono;
     }
+
+    /*
+    Metodos getter and setter de la clase Persona
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /*
+    Metodos getter and setter de la clase Persona
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /*
+    Metodos getter and setter de la clase Persona
+     */
+    public String getID() {
+        return ID;
+    }
+
+    /*
+    Metodos getter and setter de la clase Persona
+     */
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    /*
+    Metodos getter and setter de la clase Persona
+     */
+    public int getTelefono() {
+        return telefono;
+    }
+
+    /*
+    Metodos getter and setter de la clase Persona
+     */
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
 }

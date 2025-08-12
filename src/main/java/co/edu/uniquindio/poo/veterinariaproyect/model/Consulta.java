@@ -16,49 +16,74 @@ public class Consulta {
         this.cita = cita;
     }
 
-    /**
-     * Métodos getter y setter de los atributos de la clase Consulta
-     * @return
+    /*
+    Metodos getter and setter de la clase Consulta
      */
     public String getFecha() {
         return fecha;
     }
 
+    /*
+    Metodos getter and setter de la clase Consulta
+     */
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
+    /*
+    Metodos getter and setter de la clase Consulta
+     */
     public String getiD() {
         return iD;
     }
 
+    /*
+    Metodos getter and setter de la clase Consulta
+     */
     public void setiD(String iD) {
         this.iD = iD;
     }
 
+    /*
+    Metodos getter and setter de la clase Consulta
+     */
     public String getHora() {
         return hora;
     }
 
+    /*
+    Metodos getter and setter de la clase Consulta
+     */
     public void setHora(String hora) {
         this.hora = hora;
     }
 
+    /*
+    Metodos getter and setter de la clase Consulta
+     */
     public String getMotivo() {
         return motivo;
     }
 
+    /*
+    Metodos getter and setter de la clase Consulta
+     */
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
 
+    /*
+    Metodos getter and setter de la clase Consulta
+     */
     public Cita getCita() {
         return cita;
     }
 
+    /*
+    Metodos getter and setter de la clase Consulta
+     */
     public void setCita(Cita cita) {
         this.cita = cita;
     }
-=======
 
 }
