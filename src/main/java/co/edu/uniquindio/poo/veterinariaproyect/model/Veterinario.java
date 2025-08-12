@@ -14,6 +14,35 @@ public class Veterinario extends Persona{
 
     }
 
+    /**
+     * Metodo para ver el historial que lleva el toString de la consuta y el tratamiento
+     * @param clinica
+     * @param IDConsulta
+     * @param IDTratamiento
+     * @return
+     */
+    public String consultarHistorialMedico(ClinicaVeterinaria clinica, String IDConsulta, String IDTratamiento) {
+        Consulta consultaEncontrada = null;
+        Tratamiento tratamientoEncontrado = null;
+
+        for (Consulta consulta : clinica.getListConsultas()) {
+            if (consulta.getID().equals(IDConsulta)) {
+                consultaEncontrada = consulta;
+                break;
+            }
+        }
+
+        for (Tratamiento tratamiento : clinica.getListTratamientos()) {
+            if (tratamiento.ID().equals(IDTratamiento)) {
+                tratamientoEncontrado = tratamiento;
+                break;
+            }
+        }
+
+        return consultaEncontrada.toString() + "\n" + tratamientoEncontrado.toString();
+    }
+
+
     /*
     Metodos getter y setter de la clase Veterinario
      */
