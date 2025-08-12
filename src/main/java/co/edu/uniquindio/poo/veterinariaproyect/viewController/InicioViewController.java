@@ -6,11 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 
 
 import java.io.IOException;
 
 public class InicioViewController {
+
 
     @FXML
     public void iniciarMenu(ActionEvent event) throws IOException {

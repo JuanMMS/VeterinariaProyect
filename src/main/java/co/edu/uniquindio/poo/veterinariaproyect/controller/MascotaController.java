@@ -8,31 +8,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+import static co.edu.uniquindio.poo.veterinariaproyect.App.clinica1;
 
 public class MascotaController {
 
-    private ClinicaVeterinaria clinica;
 
-    public MascotaController(ClinicaVeterinaria clinica) {
-        this.clinica = clinica;
+    public MascotaController() {
     }
 
     public ObservableList<Mascota> obtenerMascotas() {
-        return FXCollections.observableArrayList(clinica.getListMascotas());
+        return FXCollections.observableArrayList(clinica1.getListMascotas());
     }
 
     public void agregarMascota(Mascota mascota) {
-        clinica.agregarMascota(mascota);
+        clinica1.agregarMascota(mascota);
     }
 
     public void eliminarMascota(Mascota mascota) {
-        clinica.eliminarMascota(mascota);
+        clinica1.eliminarMascota(mascota);
     }
 
     //public void actualizarMascota(Mascota mascota) {
-        //clinica.actualizarMascota(mascota);
+        //clinica1.actualizarMascota(mascota);
     //}
     private void volverMenu() {
         try {

@@ -35,7 +35,7 @@ public class MascotaViewController {
 
     @FXML
     public void initialize() {
-        mascotaController = new MascotaController(App.getInstance());
+        mascotaController = new MascotaController();
 
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colEspecie.setCellValueFactory(new PropertyValueFactory<>("especie"));

@@ -1,8 +1,10 @@
 package co.edu.uniquindio.poo.veterinariaproyect;
 
+import co.edu.uniquindio.poo.veterinariaproyect.controller.MenuController;
 import co.edu.uniquindio.poo.veterinariaproyect.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -13,18 +15,30 @@ import java.util.List;
 public class App extends Application {
 
 
+    private static Stage primaryStage;
+    public static ClinicaVeterinaria clinica1;
 
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage;
+
+
         // Inicializamos datos
         initData();
 
         // Cargar el menú principal
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("inicio.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Clínica Veterinaria");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void cambiarEscena(String fxml) throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
+        Scene scene = new Scene(loader.load());
+        primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
     }
 
     private void initData() {
@@ -69,8 +83,8 @@ public class App extends Application {
         mascotas.add(mascota2);
 
         //Crear tratamientos
-        Tratamiento trat1 = new Tratamiento("Vacunación", "Vacuna antirrábica", "10-08-2025");
-        Tratamiento trat2 = new Tratamiento("Desparasitación", "Desparasitación interna", "05-08-2025");
+        Tratamiento trat1 = new Tratamiento("Vacunación", "Vacuna antirrábica", "350", "DIS");
+        Tratamiento trat2 = new Tratamiento("Desparasitación", "Desparasitación interna","180", "DSA");
         tratamientos.add(trat1);
         tratamientos.add(trat2);
 

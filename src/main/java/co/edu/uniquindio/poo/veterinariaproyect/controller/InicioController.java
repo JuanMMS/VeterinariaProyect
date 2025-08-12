@@ -1,4 +1,5 @@
 package co.edu.uniquindio.poo.veterinariaproyect.controller;
+import co.edu.uniquindio.poo.veterinariaproyect.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,14 +19,9 @@ public class InicioController {
     @FXML
     private void iniciarMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/veterinariaproyect/fxml/menu.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Iniciar Sesión");
-            stage.show();
+            App.cambiarEscena("menu.fxml");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }
