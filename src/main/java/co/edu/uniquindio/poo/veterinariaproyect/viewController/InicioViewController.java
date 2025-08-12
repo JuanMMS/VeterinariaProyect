@@ -15,7 +15,8 @@ public class InicioViewController {
 
     @FXML
     public void abrirMenu(ActionEvent event) {
-        inicioController.mostrarVentanaMenu((Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow());
+        inicioController.mostrarVentanaMenu(
+            (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow()
+        );
     }
 }
-

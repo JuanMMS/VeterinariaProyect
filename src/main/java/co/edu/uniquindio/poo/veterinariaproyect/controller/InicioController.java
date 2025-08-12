@@ -10,7 +10,7 @@ public class InicioController {
     public void mostrarVentanaMenu(Stage stageActual) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/co/edu/uniquindio/poo/veterinariaproyect/view/Menu.fxml")
+                getClass().getResource("/co/edu/uniquindio/poo/veterinariaproyect/view/Menu.fxml")
             );
             Parent root = loader.load();
 
