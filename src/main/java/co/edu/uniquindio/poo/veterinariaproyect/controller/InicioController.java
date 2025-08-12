@@ -9,14 +9,14 @@ import java.io.IOException;
 
 public class InicioController {
 
-    private Stage primaryStage;
+    private Stage inicioStage;
 
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    public void setInicioStage(Stage primaryStage) {
+        this.inicioStage = primaryStage;
     }
 
     @FXML
-    private void abrirLogin() {
+    private void iniciarMenu() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/veterinariaproyect/fxml/menu.fxml"));
             Parent root = loader.load();
