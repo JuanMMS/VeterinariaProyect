@@ -14,4 +14,46 @@ public class Veterinario extends Persona{
 
     }
 
+    /*
+    Metodos getter y setter de la clase Veterinario
+     */
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    /*
+    Metodos getter y setter de la clase Veterinario
+     */
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    /*
+    Metodos getter y setter de la clase Veterinario
+     */
+    public String getLicencia() {
+        return licencia;
+    }
+
+    /*
+    Metodos getter y setter de la clase Veterinario
+     */
+    public void setLicencia(String licencia) {
+        this.licencia = licencia;
+    }
+
+    /*
+    Metodos getter y setter de la clase Veterinario
+     */
+    public boolean isDisponibilidad() {
+        return disponibilidad;
+    }
+
+    /*
+    Metodos getter y setter de la clase Veterinario
+     */
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
 }
