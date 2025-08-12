@@ -1,22 +1,20 @@
 package co.edu.uniquindio.poo.veterinariaproyect.viewController;
 
-import co.edu.uniquindio.poo.veterinariaproyect.controller.InicioController;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+
+import javafx.scene.Parent;
+
+
+import java.io.IOException;
 
 public class InicioViewController {
 
-    private InicioController inicioController;
-
-    public InicioViewController() {
-        this.inicioController = new InicioController();
-    }
-
     @FXML
-    public void abrirMenu(ActionEvent event) {
-        inicioController.mostrarVentanaMenu(
-            (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow()
-        );
+    public void abrirLogin(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/veterinariaproyect/fxml/menu.fxml"));
+        Parent root = loader.load();
     }
 }
