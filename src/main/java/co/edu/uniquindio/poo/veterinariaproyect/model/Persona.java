@@ -13,6 +13,10 @@ public class Persona {
         this.telefono = telefono;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 64668e7ce8245b7e57df2a72b22b4669e292f0dc
     /*
     Metodos getter and setter de la clase Persona
      */
@@ -54,4 +58,9 @@ public class Persona {
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 64668e7ce8245b7e57df2a72b22b4669e292f0dc
 }
