@@ -1,35 +1,41 @@
 package co.edu.uniquindio.poo.veterinariaproyect;
 
-import co.edu.uniquindio.poo.veterinariaproyect.controller.MenuController;
 import co.edu.uniquindio.poo.veterinariaproyect.model.*;
-import co.edu.uniquindio.poo.veterinariaproyect.model.ClinicaVeterinaria;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase principal de la aplicación.
+ * <p>
+ * Se encarga de inicializar la interfaz gráfica, cargar los datos iniciales
+ * de la clínica y gestionar el cambio de escenas.
+ * </p>
+ */
 public class App extends Application {
-
 
     private static Stage primaryStage;
     public static ClinicaVeterinaria clinica1;
 
+    /**
+     * Inicia la aplicación y configura la ventana principal.
+     * <p>
+     * Este método carga los datos iniciales de la clínica, crea la escena
+     * inicial y la muestra en la ventana principal (stage).
+     * </p>
+     *
+     * @param stage La ventana principal (stage) de la aplicación.
+     * @throws IOException Si ocurre un error al cargar el archivo FXML.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-
-
-        // Inicializamos datos
         initData();
-        App.clinica1 = new ClinicaVeterinaria("Clínica San Albero", "1234");
-        // Cargar el menú principal
+
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("inicio.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Clínica Veterinaria");
@@ -37,9 +43,12 @@ public class App extends Application {
         stage.show();
     }
 
-
-
-    //Metodo para cambiar de escena
+    /**
+     * Cambia la escena actual de la aplicación por una nueva escena cargada desde un archivo FXML.
+     *
+     * @param fxml El nombre del archivo FXML (por ejemplo, "menu.fxml").
+     * @throws IOException Si ocurre un error al cargar el archivo FXML.
+     */
     public static void cambiarEscena(String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
         Scene scene = new Scene(loader.load());
@@ -47,31 +56,24 @@ public class App extends Application {
         primaryStage.centerOnScreen();
     }
 
-
-    // Método para cerrar programa
+    /**
+     * Cierra la aplicación.
+     */
     public static void cerrarPrograma() {
         System.exit(0);
     }
-
-    // Método para volver atrás a una escena específica, con evento para obtener Stage
-    public static void volverAtras(ActionEvent event, String fxml) {
-        try {
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Parent root = FXMLLoader.load(App.class.getResource(fxml));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.centerOnScreen();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Inicializa y carga los datos de prueba en la clínica.
+     * <p>
+     * Este método crea instancias de `ClinicaVeterinaria`, `Propietario`, `Mascota`, `Cita`,
+     * `Consulta`, etc., y las añade a las listas correspondientes de la clínica.
+     * </p>
+     */
     private void initData() {
-        //Crear clínica
-        ClinicaVeterinaria clinica1 = new ClinicaVeterinaria("Clínica San Albero", "1234");
+        // Inicializa el objeto estático de la clínica
+        clinica1 = new ClinicaVeterinaria("Clínica San Albero", "1234");
 
-        //Crear Listas globales
-
+        // Crea y popula las listas de datos
         List<Mascota> mascotas = new ArrayList<>();
         List<Persona> personas = new ArrayList<>();
         List<PersonalApoyo> personalApoyo = new ArrayList<>();
@@ -81,7 +83,7 @@ public class App extends Application {
         List<Cita> citas = new ArrayList<>();
         List<Tratamiento> tratamientos = new ArrayList<>();
 
-        //Definir personas base
+        // Define personas base
         Propietario prop1 = new Propietario("Juan Pérez", "12345678", 317561655, "Cll 35 - 10");
         Propietario prop2 = new Propietario("Ana Gómez", "87654321", 315561655, "Cll 12 - 10");
         propietarios.add(prop1);
@@ -101,41 +103,43 @@ public class App extends Application {
         personas.addAll(veterinarios);
         personas.addAll(personalApoyo);
 
-        //Crear mascotas
+        // Crea mascotas
         Mascota mascota1 = new Mascota("Firulais", 8, "F2018", TipoEspecie.PERRO, prop1);
         Mascota mascota2 = new Mascota("Misu", 10, "M2013", TipoEspecie.GATO, prop2);
         mascotas.add(mascota1);
         mascotas.add(mascota2);
 
-        //Crear tratamientos
+        // Crea tratamientos
         Tratamiento trat1 = new Tratamiento("Vacunación", "Vacuna antirrábica", "350", "DIS");
         Tratamiento trat2 = new Tratamiento("Desparasitación", "Desparasitación interna","180", "DSA");
         tratamientos.add(trat1);
         tratamientos.add(trat2);
 
-
-
-        //Definir citas
+        // Define citas
         Cita cita1 = new Cita("54DF4", "10-05-2025", "15:00", LugarCita.SEDECENTRO, vet1, mascota1, prop1, personal1);
-        Cita cita2 = new Cita("55DF4", "05-05-2025", "12:00", LugarCita.SEDENORTE, vet2, mascota2, prop1, personal2);
+        Cita cita2 = new Cita("55DF4", "05-05-2025", "12:00", LugarCita.SEDENORTE, vet2, mascota2, prop2, personal2);
         citas.add(cita1);
         citas.add(cita2);
 
-        //Definir consultas consultas
+        // Define consultas
         Consulta consulta1 = new Consulta("10-08-2025", "545FDF5","15:05", "Chequeo general", cita1);
         Consulta consulta2 = new Consulta("05-08-2025", "1FD5F15", "12:05", "Control de salud", cita2);
         consultas.add(consulta1);
         consultas.add(consulta2);
 
-        // 7. Relacionar objetos con la clínica
+        // Relaciona objetos con la clínica
         clinica1.getListPersonas().addAll(personas);
         clinica1.getListMascotas().addAll(mascotas);
         clinica1.getListConsultas().addAll(consultas);
         clinica1.getListCitas().addAll(citas);
     }
 
+    /**
+     * Método principal para lanzar la aplicación.
+     *
+     * @param args Argumentos de la línea de comandos.
+     */
     public static void main(String[] args) {
         launch();
     }
-
 }

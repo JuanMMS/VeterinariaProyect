@@ -14,13 +14,6 @@ public class Propietario extends Persona {
     Metodos getter y setter de la clase Propietario
      */
 
-<<<<<<< HEAD
-=======
-    /*
-    Metodos getter y setter de la clase Propietario
-     */
-
->>>>>>> 64668e7ce8245b7e57df2a72b22b4669e292f0dc
     public String getDireccion() {
         return direccion;
     }
@@ -31,9 +24,5 @@ public class Propietario extends Persona {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 64668e7ce8245b7e57df2a72b22b4669e292f0dc
 }

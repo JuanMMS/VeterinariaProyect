@@ -13,11 +13,6 @@ public class Veterinario extends Persona{
         this.disponibilidad = disponibilidad;
 
     }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 64668e7ce8245b7e57df2a72b22b4669e292f0dc
     /**
      * Metodo para ver el historial que lleva el toString de la consuta y el tratamiento
      * @param clinica
@@ -89,8 +84,5 @@ public class Veterinario extends Persona{
     public void setDisponibilidad(boolean disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 64668e7ce8245b7e57df2a72b22b4669e292f0dc
 }

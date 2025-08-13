@@ -46,8 +46,5 @@
          <Font name="Bell MT" size="35.0" />
       </font>
    </Label>
-<<<<<<< HEAD
    <Button fx:id="cerrar" layoutX="555.0" layoutY="14.0" mnemonicParsing="false" onAction="#cerrarPrograma" prefHeight="28.0" prefWidth="31.0" text="X" />
-=======
->>>>>>> 9e11a08b1019c12c60a7d3496df5c788ce783612
 </Pane>

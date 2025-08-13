@@ -2,57 +2,30 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-
-<?import javafx.geometry.Insets?>
-
-
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.MenuViewController"
-      spacing="15" alignment="TOP_CENTER" padding="20">
-
-
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="442.0" prefWidth="531.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.MenuViewController">
-   <children>
+    <children>
         <Button fx:id="crudPersonal" layoutX="396.0" layoutY="118.0" onAction="#onPersonalClick" prefHeight="37.0" prefWidth="82.0" text="Personal" />
         <Button fx:id="crudMascotas" layoutX="225.0" layoutY="118.0" onAction="#onMascotasClick" prefHeight="38.0" prefWidth="82.0" text="Mascotas" />
 
-                <TableView fx:id="tablaCitas" layoutX="55.0" layoutY="201.0" prefHeight="211.0" prefWidth="421.0">
-           <columns>
-               <TableColumn fx:id="columnaFecha" prefWidth="80.40000915527344" text="Fecha" />
-               <TableColumn fx:id="columnaHora" minWidth="0.0" prefWidth="119.5999755859375" text="Hora" />
-               <TableColumn fx:id="columnaDescripcion" minWidth="0.0" prefWidth="219.60000610351562" text="Descripción" />
-           </columns>
-       </TableView>
-      <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="95.0" layoutY="27.0" prefHeight="50.0" prefWidth="342.0" text="Bienvenido!" textAlignment="CENTER">
-         <font>
-            <Font name="Century Gothic" size="46.0" />
-         </font>
-      </Label>
+        <TableView fx:id="tablaCitas" layoutX="18.0" layoutY="201.0" prefHeight="211.0" prefWidth="495.0">
+            <columns>
+                <TableColumn fx:id="columnaFecha" prefWidth="60.0" text="Fecha" />
+                <TableColumn fx:id="columnaHora" minWidth="0.0" prefWidth="50.0" text="Hora" />
+                <TableColumn fx:id="columnaMascota" minWidth="0.0" prefWidth="60.0" text="Mascota" />
+                <TableColumn fx:id="columnaDuenio" minWidth="0.0" prefWidth="110.0" text="Dueño" />
+                <TableColumn fx:id="columnaTelefono" minWidth="0.0" prefWidth="100.0" text="Contacto" />
+                <TableColumn fx:id="columnaVeterinario" minWidth="0.0" prefWidth="110.0" text="Veterinario" />
+            </columns>
+        </TableView>
+        <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="95.0" layoutY="27.0" prefHeight="50.0" prefWidth="342.0" text="Bienvenido!" textAlignment="CENTER">
+            <font>
+                <Font name="Century Gothic" size="46.0" />
+            </font>
+        </Label>
         <Button fx:id="crudCitas" layoutX="54.0" layoutY="118.0" onAction="#onCitasClick" prefHeight="38.0" prefWidth="82.0" text="Citas" />
-      <Button fx:id="cerrarMenu" layoutX="486.0" layoutY="13.0" mnemonicParsing="false" onAction="#cerrarPrograma" prefHeight="28.0" prefWidth="30.0" text="X" />
-      <Button fx:id="atrasMenu" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#volverAtras" text="Atrás" />
-   </children>
-
+        <Button fx:id="cerrarMenu" layoutX="486.0" layoutY="13.0" mnemonicParsing="false" onAction="#cerrarPrograma" prefHeight="28.0" prefWidth="30.0" text="X" />
+        <Button fx:id="atrasMenu" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#volverAtras" text="Atrás" />
+    </children>
 </AnchorPane>
-
-    <Label text="Bienvenido" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
-
-    <HBox spacing="10" alignment="CENTER">
-        <Button text="Mascotas" onAction="#onMascotasClick" />
-        <Button text="Citas" onAction="#onCitasClick" />
-        <Button text="Personal" onAction="#onPersonalClick" />
-    </HBox>
-
-    <TableView fx:id="tablaCitas" prefHeight="300" prefWidth="500">
-        <columns>
-            <TableColumn fx:id="columnaFecha" text="Fecha" prefWidth="150" />
-            <TableColumn fx:id="columnaHora" text="Hora" prefWidth="150" />
-            <TableColumn fx:id="columnaDescripcion" text="Descripción" prefWidth="200" />
-        </columns>
-    </TableView>
-
-</VBox>
