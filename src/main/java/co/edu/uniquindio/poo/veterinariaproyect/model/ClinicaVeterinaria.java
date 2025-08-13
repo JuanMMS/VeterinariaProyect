@@ -194,7 +194,7 @@ public class ClinicaVeterinaria {
         listTratamientos.remove(tratamiento);
     }
 
-<<<<<<< HEAD
+
     public boolean agendarCita(Cita cita, ClinicaVeterinaria clinicaVeterinaria) {
         for (Cita citaExistente : clinicaVeterinaria.getListCitas()) {
             boolean mismaFecha = citaExistente.getFecha().equals(cita.getFecha());
@@ -208,8 +208,4 @@ public class ClinicaVeterinaria {
         clinicaVeterinaria.getListCitas().add(cita);
         return true;
     }
-=======
->>>>>>> 64668e7ce8245b7e57df2a72b22b4669e292f0dc
-
-
 }

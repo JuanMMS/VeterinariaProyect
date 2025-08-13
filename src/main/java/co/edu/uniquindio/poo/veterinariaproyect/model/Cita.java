@@ -132,4 +132,19 @@ public class Cita {
     public void setPersonalApoyo(PersonalApoyo personalApoyo) {
         this.personalApoyo = personalApoyo;
     }
+    public String getNombreMascota () {
+        return this.mascota.getNombre();
+    }
+    public String getNombrePropietario() {
+        return this.propietario.getNombre();
+    }
+
+    public int getTelefonoPropietario() {
+        return this.propietario.getTelefono();
+    }
+    public String getNombreVeterinario() {
+        return this.veterinario.getNombre();
+    }
 }
+
+

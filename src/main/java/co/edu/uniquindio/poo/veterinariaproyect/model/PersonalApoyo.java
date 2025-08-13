@@ -3,8 +3,7 @@ package co.edu.uniquindio.poo.veterinariaproyect.model;
 public class PersonalApoyo extends Persona {
 
 
-<<<<<<< HEAD
-=======
+
     private Cita cita;
 
     public PersonalApoyo(String nombre, String ID, int telefono, Cita cita) {
@@ -34,14 +33,6 @@ public class PersonalApoyo extends Persona {
         clinicaVeterinaria.getListCitas().add(cita);
         return true;
     }
-
-
-
-
-
-
->>>>>>> 64668e7ce8245b7e57df2a72b22b4669e292f0dc
-
     public PersonalApoyo(String nombre, String ID, int telefono) {
         super(nombre, ID, telefono);
 
@@ -49,7 +40,6 @@ public class PersonalApoyo extends Persona {
 
     }
 
-<<<<<<< HEAD
     /**
      * Metodo agendarCita con validacion que sea en diferente hora, lugar y sede y
      * se almacene en la lista de la clinica Veterinaria
@@ -57,8 +47,5 @@ public class PersonalApoyo extends Persona {
      * @param clinicaVeterinaria
      * @return
      */
-=======
 
-
->>>>>>> 64668e7ce8245b7e57df2a72b22b4669e292f0dc
 }
