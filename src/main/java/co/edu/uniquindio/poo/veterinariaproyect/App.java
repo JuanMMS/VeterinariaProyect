@@ -1,12 +1,16 @@
 package co.edu.uniquindio.poo.veterinariaproyect;
 
+import co.edu.uniquindio.poo.veterinariaproyect.controller.MenuController;
 import co.edu.uniquindio.poo.veterinariaproyect.model.*;
 import co.edu.uniquindio.poo.veterinariaproyect.model.ClinicaVeterinaria;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,18 +18,52 @@ import java.util.List;
 public class App extends Application {
 
 
+    private static Stage primaryStage;
+    public static ClinicaVeterinaria clinica1;
 
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage;
+
+
         // Inicializamos datos
         initData();
         App.clinica1 = new ClinicaVeterinaria("Clínica San Albero", "1234");
         // Cargar el menú principal
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("inicio.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Clínica Veterinaria");
         stage.setScene(scene);
         stage.show();
+    }
+
+
+
+    //Metodo para cambiar de escena
+    public static void cambiarEscena(String fxml) throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
+        Scene scene = new Scene(loader.load());
+        primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
+    }
+
+
+    // Método para cerrar programa
+    public static void cerrarPrograma() {
+        System.exit(0);
+    }
+
+    // Método para volver atrás a una escena específica, con evento para obtener Stage
+    public static void volverAtras(ActionEvent event, String fxml) {
+        try {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Parent root = FXMLLoader.load(App.class.getResource(fxml));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initData() {
@@ -70,8 +108,8 @@ public class App extends Application {
         mascotas.add(mascota2);
 
         //Crear tratamientos
-        Tratamiento trat1 = new Tratamiento("Vacunación", "Vacuna antirrábica", "10-08-2025");
-        Tratamiento trat2 = new Tratamiento("Desparasitación", "Desparasitación interna", "05-08-2025");
+        Tratamiento trat1 = new Tratamiento("Vacunación", "Vacuna antirrábica", "350", "DIS");
+        Tratamiento trat2 = new Tratamiento("Desparasitación", "Desparasitación interna","180", "DSA");
         tratamientos.add(trat1);
         tratamientos.add(trat2);
 
@@ -99,4 +137,5 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+
 }

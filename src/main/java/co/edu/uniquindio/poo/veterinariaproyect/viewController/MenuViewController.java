@@ -1,8 +1,9 @@
 package co.edu.uniquindio.poo.veterinariaproyect.viewController;
 
-<<<<<<< Updated upstream
+
+
 public class MenuViewController {
-=======
+
 import co.edu.uniquindio.poo.veterinariaproyect.App;
 import co.edu.uniquindio.poo.veterinariaproyect.controller.MenuController;
 import co.edu.uniquindio.poo.veterinariaproyect.model.Cita;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 
 public class MenuViewController {
+
 
     @FXML
     private TableView<Cita> tablaCitas;
@@ -37,6 +39,7 @@ public class MenuViewController {
 
         tablaCitas.setItems(menuController.getListaCitas());
     }
+
     @FXML
     private void cerrarPrograma() {
         App.cerrarPrograma();
@@ -57,5 +60,4 @@ public class MenuViewController {
     private void onPersonalClick() throws IOException {
         App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/personas.fxml");
     }
->>>>>>> Stashed changes
 }

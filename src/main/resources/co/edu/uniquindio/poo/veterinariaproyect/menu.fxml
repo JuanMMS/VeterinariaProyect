@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<<<<<<< Updated upstream
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="co.edu.uniquindio.poo.veterinariaproyect.controller.MenuController"
-            prefHeight="400.0" prefWidth="600.0">
 
-=======
+<?import javafx.geometry.Insets?>
+
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.MenuViewController"
+      spacing="15" alignment="TOP_CENTER" padding="20">
+
+
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="442.0" prefWidth="531.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.MenuViewController">
@@ -36,5 +36,23 @@
       <Button fx:id="cerrarMenu" layoutX="486.0" layoutY="13.0" mnemonicParsing="false" onAction="#cerrarPrograma" prefHeight="28.0" prefWidth="30.0" text="X" />
       <Button fx:id="atrasMenu" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#volverAtras" text="Atrás" />
    </children>
->>>>>>> Stashed changes
+
 </AnchorPane>
+
+    <Label text="Bienvenido" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Mascotas" onAction="#onMascotasClick" />
+        <Button text="Citas" onAction="#onCitasClick" />
+        <Button text="Personal" onAction="#onPersonalClick" />
+    </HBox>
+
+    <TableView fx:id="tablaCitas" prefHeight="300" prefWidth="500">
+        <columns>
+            <TableColumn fx:id="columnaFecha" text="Fecha" prefWidth="150" />
+            <TableColumn fx:id="columnaHora" text="Hora" prefWidth="150" />
+            <TableColumn fx:id="columnaDescripcion" text="Descripción" prefWidth="200" />
+        </columns>
+    </TableView>
+
+</VBox>

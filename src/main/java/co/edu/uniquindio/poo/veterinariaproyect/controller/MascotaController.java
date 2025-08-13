@@ -1,49 +1,53 @@
 package co.edu.uniquindio.poo.veterinariaproyect.controller;
 
-import co.edu.uniquindio.poo.veterinariaproyect.model.ClinicaVeterinaria;
 import co.edu.uniquindio.poo.veterinariaproyect.model.Mascota;
+import co.edu.uniquindio.poo.veterinariaproyect.model.Persona;
+import co.edu.uniquindio.poo.veterinariaproyect.model.Propietario;
+import co.edu.uniquindio.poo.veterinariaproyect.model.TipoEspecie;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import java.util.List;
 
-import java.io.IOException;
+import static co.edu.uniquindio.poo.veterinariaproyect.App.clinica1;
 
 public class MascotaController {
 
-    private ClinicaVeterinaria clinica;
-
-    public MascotaController(ClinicaVeterinaria clinica) {
-        this.clinica = clinica;
+    public MascotaController() {
     }
 
     public ObservableList<Mascota> obtenerMascotas() {
-        return FXCollections.observableArrayList(clinica.getListMascotas());
+        if (clinica1 != null && clinica1.getListMascotas() != null) {
+            return FXCollections.observableArrayList(clinica1.getListMascotas());
+        }
+        return FXCollections.observableArrayList();
     }
 
     public void agregarMascota(Mascota mascota) {
-        clinica.agregarMascota(mascota);
+        if (clinica1 != null) {
+            clinica1.agregarMascota(mascota);
+        }
     }
 
     public void eliminarMascota(Mascota mascota) {
-        clinica.eliminarMascota(mascota);
+        if (clinica1 != null) {
+            clinica1.eliminarMascota(mascota);
+        }
     }
 
-    //public void actualizarMascota(Mascota mascota) {
-        //clinica.actualizarMascota(mascota);
-    //}
-    private void volverMenu() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/veterinariaproyect/fxml/menu.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Iniciar Sesión");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public ObservableList<TipoEspecie> obtenerEspecies(){
+        return FXCollections.observableArrayList(TipoEspecie.values());
+    }
+
+    public ObservableList<Propietario> obtenerPropietarios() {
+        ObservableList<Propietario> propietarios = FXCollections.observableArrayList();
+        if (clinica1 != null && clinica1.getListPersonas() != null) {
+            List<Persona> listPersonas = clinica1.getListPersonas();
+            for (Persona persona : listPersonas) {
+                if (persona instanceof Propietario) {
+                    propietarios.add((Propietario) persona);
+                }
+            }
         }
+        return propietarios;
     }
 }
