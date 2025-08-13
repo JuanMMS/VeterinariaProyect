@@ -18,6 +18,20 @@
                     <ColumnConstraints hgrow="ALWAYS"/>
                 </columnConstraints>
 
+
+                <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="nombreField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Edad:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Spinner fx:id="edadSpinner" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="ID Veterinario:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="idVeterinarioField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Especie:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="especieCombo" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+
                 <!-- Nombre -->
                 <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
                 <TextField fx:id="nombreField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
@@ -35,22 +49,34 @@
                 <ComboBox fx:id="especieCombo" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
                 <!-- Propietario -->
+
                 <Label text="Propietario:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
                 <ComboBox fx:id="propietarioCombo" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
             </GridPane>
 
             <HBox spacing="10" alignment="CENTER">
+
+                <Button fx:id="btnAgregar" text="Agregar" onAction="#agregarMascota"/>
+                <Button fx:id="btnActualizar" text="Actualizar" onAction="#actualizarMascota"/>
+                <Button fx:id="btnEliminar" text="Eliminar" onAction="#eliminarMascota"/>
+                <Button fx:id="btnVolver" text="Volver" onAction="#volverMenu"/>
+
                 <Button text="Agregar" onAction="#agregarMascota"/>
                 <Button text="Actualizar" onAction="#actualizarMascota"/>
                 <Button text="Eliminar" onAction="#eliminarMascota"/>
                 <Button text="Volver" onAction="#volverMenu"/>
+
             </HBox>
 
             <TableView fx:id="tablaMascotas">
                 <columns>
                     <TableColumn text="Nombre" fx:id="colNombre"/>
                     <TableColumn text="Edad" fx:id="colEdad"/>
+
+                    <TableColumn text="ID Veterinario" fx:id="colIdVeterinario"/>
+
                     <TableColumn text="ID" fx:id="colId"/>
+
                     <TableColumn text="Especie" fx:id="colEspecie"/>
                     <TableColumn text="Propietario" fx:id="colPropietario"/>
                 </columns>
@@ -58,4 +84,6 @@
 
         </VBox>
     </center>
+
 </BorderPane>
+

@@ -1,5 +1,10 @@
 package co.edu.uniquindio.poo.veterinariaproyect.viewController;
 
+
+
+public class MenuViewController {
+
+import co.edu.uniquindio.poo.veterinariaproyect.App;
 import co.edu.uniquindio.poo.veterinariaproyect.controller.MenuController;
 import co.edu.uniquindio.poo.veterinariaproyect.model.Cita;
 import javafx.fxml.FXML;
@@ -8,7 +13,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
+
 public class MenuViewController {
+
 
     @FXML
     private TableView<Cita> tablaCitas;
@@ -33,12 +41,23 @@ public class MenuViewController {
     }
 
     @FXML
-    private void onMascotasClick() {
+    private void cerrarPrograma() {
+        App.cerrarPrograma();
     }
     @FXML
-    private void onCitasClick() {
+    public void volverAtras() throws IOException {
+        App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/Inicio.fxml");
     }
     @FXML
-    private void onPersonalClick() {
+    private void onMascotasClick() throws IOException {
+        App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/mascota.fxml");
+    }
+    @FXML
+    private void onCitasClick() throws IOException {
+        App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/agenda.fxml");
+    }
+    @FXML
+    private void onPersonalClick() throws IOException {
+        App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/personas.fxml");
     }
 }

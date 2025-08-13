@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.veterinariaproyect;
 
 import co.edu.uniquindio.poo.veterinariaproyect.controller.MenuController;
 import co.edu.uniquindio.poo.veterinariaproyect.model.*;
+import co.edu.uniquindio.poo.veterinariaproyect.model.ClinicaVeterinaria;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -27,7 +28,7 @@ public class App extends Application {
 
         // Inicializamos datos
         initData();
-
+        App.clinica1 = new ClinicaVeterinaria("Clínica San Albero", "1234");
         // Cargar el menú principal
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("inicio.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
