@@ -1,7 +1,6 @@
 package co.edu.uniquindio.poo.veterinariaproyect.viewController;
 
 import co.edu.uniquindio.poo.veterinariaproyect.App;
-import co.edu.uniquindio.poo.veterinariaproyect.controller.MenuController;
 import co.edu.uniquindio.poo.veterinariaproyect.controller.PersonasController;
 import co.edu.uniquindio.poo.veterinariaproyect.model.Persona;
 import javafx.fxml.FXML;
@@ -36,13 +35,24 @@ public class PersonasViewController {
         telefonoColumn.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         rolColumn.setCellValueFactory(new PropertyValueFactory<>("rol"));
     }
-    public void agregarPersona(Persona persona) {
+    @FXML
+    public void agregarPersona() {
 
     }
-    public void eliminarPersona(Persona persona) {
+    @FXML
+    public void eliminarPersona() {
     }
-    public void actualizarPersona(Persona persona) {
+    @FXML
+    public void actualizarPersona() {
 
+    }
+    @FXML
+    public void leerPersona() {
+
+    }
+    @FXML
+    public void volverAtras() throws IOException {
+        App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/menu.fxml");
     }
 
 }

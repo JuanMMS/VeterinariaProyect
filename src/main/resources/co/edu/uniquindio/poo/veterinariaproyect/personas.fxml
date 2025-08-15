@@ -18,8 +18,8 @@
                <items>
                   <Button fx:id="BotonAgregar" mnemonicParsing="false" onAction="#agregarPersona" text="Agregar" />
                   <Button fx:id="BotonEliminar" mnemonicParsing="false" onAction="#eliminarPersona" text="Eliminar" />
-                  <Button fx:id="BotonLeer" mnemonicParsing="false" onAction="#botonLeer" text="Leer" />
-                  <Button fx:id="BotonModificar" mnemonicParsing="false" onAction="#botonModificar" text="Modificar" />
+                  <Button fx:id="BotonLeer" mnemonicParsing="false" onAction="#leerPersona" text="Leer" />
+                  <Button fx:id="BotonModificar" mnemonicParsing="false" onAction="#actualizarPersona" text="Modificar" />
                </items>
             </ToolBar>
             <ChoiceBox id="SeleccionadorTipoPersona" fx:id="SelectorTIpoPersona" layoutX="279.0" layoutY="278.0" prefWidth="150.0" />
@@ -32,7 +32,7 @@
             <Label layoutX="276.0" layoutY="261.0" text="Seleccione el tipo de persona" />
          </children>
       </Pane>
-      <Button layoutX="12.0" layoutY="15.0" onAction="#volverMenu" text="Volver"> fx:id="BotonVolver" layoutX="521.0" layoutY="-14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" text="X" textOverrun="WORD_ELLIPSIS">
+      <Button layoutX="12.0" layoutY="15.0" onAction="#volverAtras" text="Volver"> fx:id="BotonVolver" layoutX="521.0" layoutY="-14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" text="X" textOverrun="WORD_ELLIPSIS">
             </Button>
    </children>
 </AnchorPane>

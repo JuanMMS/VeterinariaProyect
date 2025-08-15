@@ -34,6 +34,16 @@ public class MascotaController {
         }
     }
 
+    public void actualizarMascota(Mascota mascotaOriginal, Mascota mascotaActualizada) {
+        if (clinica1 != null && clinica1.getListMascotas() != null) {
+            List<Mascota> listMascotas = clinica1.getListMascotas();
+            int index = listMascotas.indexOf(mascotaOriginal);
+            if (index != -1) {
+                listMascotas.set(index, mascotaActualizada);
+            }
+        }
+    }
+
     public ObservableList<TipoEspecie> obtenerEspecies(){
         return FXCollections.observableArrayList(TipoEspecie.values());
     }
