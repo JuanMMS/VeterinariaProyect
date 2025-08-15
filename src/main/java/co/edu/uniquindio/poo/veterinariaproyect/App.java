@@ -89,8 +89,8 @@ public class App extends Application {
         propietarios.add(prop1);
         propietarios.add(prop2);
 
-        Veterinario vet1 = new Veterinario("Carlos Ruiz", "11223344", 31575, "EspecialidadVeterinario.CARDIOLOGIA", "21515151", true);
-        Veterinario vet2 = new Veterinario("María Torres", "99887766", 31878, "EspecialidadVeterinario.GENERAL","51552111", false);
+        Veterinario vet1 = new Veterinario("Carlos Ruiz", "11223344", 31575, EspecialidadVeterinario.CARDIOLOGIA, "21515151", true);
+        Veterinario vet2 = new Veterinario("María Torres", "99887766", 31878, EspecialidadVeterinario.GENERAL,"51552111", false);
         veterinarios.add(vet1);
         veterinarios.add(vet2);
 
