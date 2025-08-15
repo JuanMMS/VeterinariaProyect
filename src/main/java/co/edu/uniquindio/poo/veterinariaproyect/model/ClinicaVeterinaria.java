@@ -195,5 +195,25 @@ public class ClinicaVeterinaria {
     }
 
 
+<<<<<<< Updated upstream
 
+=======
+    /**
+     * Metodo para consultar citas de una fecha especifica
+     * @param fechaBuscada
+     * @return
+     */
+
+    public List<Cita> consultarCitasDiaEspecifico(String fechaBuscada) {
+        List<Cita> citasEncontradas = new ArrayList<>();
+
+        for (Cita cita : listCitas) {
+            if (cita.getFecha().equals(fechaBuscada)) {
+                citasEncontradas.add(cita);
+            }
+        }
+
+        return citasEncontradas;
+    }
+>>>>>>> Stashed changes
 }
