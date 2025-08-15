@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.veterinariaproyect.viewController;
+package co.edu.uniquindio.poo.veterinariaproyect.controller;
 
 import co.edu.uniquindio.poo.veterinariaproyect.App;
 import co.edu.uniquindio.poo.veterinariaproyect.controller.PersonasController;
@@ -26,7 +26,7 @@ public class TratamientoController {
     public void initialize() {
         tratamientoController = new TratamientoController();
         habilitarCampos(false);
-        BotonAceptar.setDisable(True);
+        BotonAceptar.setDisable(true);
 
     }
     private void habilitarCampos(boolean estado) {
@@ -78,5 +78,3 @@ public class TratamientoController {
     }
     }
 
-
-}
