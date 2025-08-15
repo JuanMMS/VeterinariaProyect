@@ -195,6 +195,28 @@ public class ClinicaVeterinaria {
     }
 
 
+
+
+
+
+    /**
+     * Metodo para consultar citas de una fecha especifica
+     * @param fechaBuscada
+     * @return
+     */
+
+    public List<Cita> consultarCitasDiaEspecifico(String fechaBuscada) {
+        List<Cita> citasEncontradas = new ArrayList<>();
+
+        for (Cita cita : listCitas) {
+            if (cita.getFecha().equals(fechaBuscada)) {
+                citasEncontradas.add(cita);
+            }
+        }
+
+        return citasEncontradas;
+}
+
     public boolean agendarCita(Cita cita, ClinicaVeterinaria clinicaVeterinaria) {
         for (Cita citaExistente : clinicaVeterinaria.getListCitas()) {
             boolean mismaFecha = citaExistente.getFecha().equals(cita.getFecha());
@@ -208,4 +230,5 @@ public class ClinicaVeterinaria {
         clinicaVeterinaria.getListCitas().add(cita);
         return true;
     }
+
 }
