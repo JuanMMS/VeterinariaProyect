@@ -6,6 +6,10 @@ import co.edu.uniquindio.poo.veterinariaproyect.model.EspecialidadVeterinario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
+import static co.edu.uniquindio.poo.veterinariaproyect.App.clinica1;
+
 public class PersonasController {
 
     public ObservableList<Persona> obtenerPersonasPorTipo(String tipo) {
@@ -18,6 +22,33 @@ public class PersonasController {
             }
         }
         return personasFiltradas;
+    }
+    public ObservableList<Persona> obtenerPersonas() {
+        if (clinica1 != null && clinica1.getListPersonas() != null) {
+            return FXCollections.observableArrayList(clinica1.getListPersonas());
+        }
+        return FXCollections.observableArrayList();
+    }
+    public void agregarPersona(Persona persona) {
+        if (clinica1 != null) {
+            clinica1.agregarPersona(persona);
+        }
+    }
+
+    public void eliminarPersona(Persona persona) {
+        if (clinica1 != null) {
+            clinica1.eliminarPersona(persona);
+        }
+    }
+
+    public void actualizarPersona(Persona personaOriginal, Persona personaActualizada) {
+        if (clinica1 != null && clinica1.getListPersonas() != null) {
+            List<Persona> listPersonas = clinica1.getListPersonas();
+            int index = listPersonas.indexOf(personaOriginal);
+            if (index != -1) {
+                listPersonas.set(index, personaActualizada);
+            }
+        }
     }
 
     public ObservableList<EspecialidadVeterinario> obtenerEspecialidades() {

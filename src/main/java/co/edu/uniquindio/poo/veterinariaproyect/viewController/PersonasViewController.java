@@ -2,15 +2,13 @@ package co.edu.uniquindio.poo.veterinariaproyect.viewController;
 
 import co.edu.uniquindio.poo.veterinariaproyect.App;
 import co.edu.uniquindio.poo.veterinariaproyect.controller.PersonasController;
-import co.edu.uniquindio.poo.veterinariaproyect.model.Persona;
-import co.edu.uniquindio.poo.veterinariaproyect.model.Propietario;
-import co.edu.uniquindio.poo.veterinariaproyect.model.EspecialidadVeterinario;
-import co.edu.uniquindio.poo.veterinariaproyect.model.Veterinario;
+import co.edu.uniquindio.poo.veterinariaproyect.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
+
 
 public class PersonasViewController {
 
@@ -35,7 +33,6 @@ public class PersonasViewController {
 
     @FXML private Button BotonAgregar;
     @FXML private Button BotonEliminar;
-    @FXML private Button BotonLeer;
     @FXML private Button BotonModificar;
 
     private PersonasController personasController;
@@ -90,7 +87,6 @@ public class PersonasViewController {
         habilitarCampos(false);
         BotonAgregar.setDisable(true);
         BotonEliminar.setDisable(true);
-        BotonLeer.setDisable(true);
         BotonModificar.setDisable(true);
     }
 
@@ -100,7 +96,6 @@ public class PersonasViewController {
         EspacioTelefono.setDisable(!estado);
         BotonAgregar.setDisable(!estado);
         BotonEliminar.setDisable(!estado);
-        BotonLeer.setDisable(!estado);
         BotonModificar.setDisable(!estado);
     }
 
@@ -122,22 +117,147 @@ public class PersonasViewController {
 
     @FXML
     public void agregarPersona() {
-        // Implementar lógica para agregar
+        String nombre = EspacioNombre.getText();
+        String id = EspacioID.getText();
+        String tipoSeleccionado = SelectorTipoPersona.getValue();
+
+        // 1. Validar los campos comunes
+        if (nombre.isEmpty() || id.isEmpty() || EspacioTelefono.getText().isEmpty() || tipoSeleccionado == null) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Campos Incompletos", "Por favor, complete todos los campos obligatorios.");
+            return;
+        }
+
+        int telefono;
+        try {
+            telefono = Integer.parseInt(EspacioTelefono.getText());
+        } catch (NumberFormatException e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Dato Incorrecto", "El campo Teléfono debe ser un número válido.");
+            return;
+        }
+
+        // Creacion persona y validacion para saber que tipo de obejto es
+        Persona nuevaPersona = null;
+        if ("Veterinario".equals(tipoSeleccionado)) {
+            String licencia = campoLicencia.getText();
+            EspecialidadVeterinario especialidad = campoEspecialidad.getValue();
+
+            if (licencia.isEmpty() || especialidad == null) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Campos Incompletos", "Complete los campos de Licencia y Especialidad.");
+                return;
+            }
+
+            // Constructor veterinario
+            nuevaPersona = new Veterinario(nombre, id, telefono, especialidad, licencia, true);
+
+        } else if ("Propietario".equals(tipoSeleccionado)) {
+            String direccion = campoDireccion.getText();
+
+            if (direccion.isEmpty()) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Campos Incompletos", "Complete el campo de Dirección.");
+                return;
+            }
+            // Constructor propietario
+            nuevaPersona = new Propietario(nombre, id, telefono, direccion);
+
+        } else if ("Personal Apoyo".equals(tipoSeleccionado)) {
+
+            // Constructor personal apoyo
+            nuevaPersona = new PersonalApoyo(nombre, id, telefono);
+        }
+
+        // 3. Agregar la persona si se creó exitosamente
+        if (nuevaPersona != null) {
+            personasController.agregarPersona(nuevaPersona);
+            actualizarTabla(tipoSeleccionado);
+            limpiarCampos();
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Persona agregada correctamente.");
+        } else {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "No se pudo crear la persona.");
+        }
+    }
+
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
     @FXML
     public void eliminarPersona() {
-        // Implementar lógica para eliminar
+        Persona persona = TablaPersonas.getSelectionModel().getSelectedItem();
+        if (persona != null) {
+            personasController.eliminarPersona(persona);
+            TablaPersonas  .setItems(personasController.obtenerPersonas());
+        } else {
+            mostrarAlerta(Alert.AlertType.WARNING, "No hay selección", "Seleccione una mascota de la tabla para eliminar.");
+        }
     }
 
     @FXML
-    public void leerPersona() {
-        // Implementar lógica para leer
-    }
+    private void actualizarPersona() {
+        Persona personaSeleccionada = TablaPersonas.getSelectionModel().getSelectedItem();
+        if (personaSeleccionada == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "No hay selección", "Seleccione una persona de la tabla para actualizar.");
+            return;
+        }
 
-    @FXML
-    public void actualizarPersona() {
-        // Implementar lógica para actualizar
+        String nombre = EspacioNombre.getText();
+        String id = EspacioID.getText();
+        String tipoSeleccionado = SelectorTipoPersona.getValue();
+
+        // 1. Validar campos comunes
+        if (nombre.isEmpty() || id.isEmpty() || EspacioTelefono.getText().isEmpty() || tipoSeleccionado == null) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Campos Incompletos", "Por favor, complete todos los campos para actualizar.");
+            return;
+        }
+
+        int telefono;
+        try {
+            telefono = Integer.parseInt(EspacioTelefono.getText());
+        } catch (NumberFormatException e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Dato Incorrecto", "El campo Teléfono debe ser un número válido.");
+            return;
+        }
+
+        // 2. Lógica para crear un nuevo objeto actualizado según el tipo
+        Persona personaActualizada = null;
+        if ("Veterinario".equals(tipoSeleccionado)) {
+            String licencia = campoLicencia.getText();
+            EspecialidadVeterinario especialidad = campoEspecialidad.getValue();
+            boolean disponibilidad = ((Veterinario) personaSeleccionada).isDisponibilidad(); // Se mantiene el valor de disponibilidad
+
+            if (licencia.isEmpty() || especialidad == null) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Campos Incompletos", "Complete los campos de Licencia y Especialidad.");
+                return;
+            }
+
+            personaActualizada = new Veterinario(nombre, id, telefono, especialidad, licencia, disponibilidad);
+
+        } else if ("Propietario".equals(tipoSeleccionado)) {
+            String direccion = campoDireccion.getText();
+
+            if (direccion.isEmpty()) {
+                mostrarAlerta(Alert.AlertType.ERROR, "Campos Incompletos", "Complete el campo de Dirección.");
+                return;
+            }
+
+            personaActualizada = new Propietario(nombre, id, telefono, direccion);
+
+        } else if ("Personal Apoyo".equals(tipoSeleccionado)) {
+            personaActualizada = new PersonalApoyo(nombre, id, telefono);
+        }
+
+        // 3. Actualizar la persona si se creó exitosamente
+        if (personaActualizada != null) {
+            personasController.actualizarPersona(personaSeleccionada, personaActualizada);
+            actualizarTabla(tipoSeleccionado);
+            limpiarCampos();
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Persona actualizada correctamente.");
+        } else {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "No se pudo actualizar la persona.");
+        }
     }
 
     private void limpiarCampos() {
