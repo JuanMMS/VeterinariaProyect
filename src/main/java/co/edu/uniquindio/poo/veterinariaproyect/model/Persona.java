@@ -1,11 +1,10 @@
 package co.edu.uniquindio.poo.veterinariaproyect.model;
 
-public class Persona {
+public abstract class Persona {
 
     protected String nombre;
     protected String ID;
     protected int telefono;
-
 
     public Persona(String nombre, String ID, int telefono) {
         this.nombre = nombre;
@@ -13,46 +12,31 @@ public class Persona {
         this.telefono = telefono;
     }
 
-    /*
-    Metodos getter and setter de la clase Persona
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /*
-    Metodos getter and setter de la clase Persona
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /*
-    Metodos getter and setter de la clase Persona
-     */
     public String getID() {
         return ID;
     }
 
-    /*
-    Metodos getter and setter de la clase Persona
-     */
     public void setID(String ID) {
         this.ID = ID;
     }
 
-    /*
-    Metodos getter and setter de la clase Persona
-     */
     public int getTelefono() {
         return telefono;
     }
 
-    /*
-    Metodos getter and setter de la clase Persona
-     */
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
+
+    // Este método es abstracto y debe ser implementado por cada clase hija.
+    public abstract String getRol();
 
 }
