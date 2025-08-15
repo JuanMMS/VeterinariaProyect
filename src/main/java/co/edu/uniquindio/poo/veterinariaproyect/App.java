@@ -79,7 +79,7 @@ public class App extends Application {
         List<PersonalApoyo> personalApoyo = new ArrayList<>();
         List<Propietario> propietarios = new ArrayList<>();
         List<Veterinario> veterinarios = new ArrayList<>();
-        List<Consulta> consultas = new ArrayList<>();
+        List<ConsultaViewController> consultas = new ArrayList<>();
         List<Cita> citas = new ArrayList<>();
         List<Tratamiento> tratamientos = new ArrayList<>();
 
@@ -122,8 +122,8 @@ public class App extends Application {
         citas.add(cita2);
 
         // Define consultas
-        Consulta consulta1 = new Consulta("10-08-2025", "545FDF5","15:05", "Chequeo general", cita1);
-        Consulta consulta2 = new Consulta("05-08-2025", "1FD5F15", "12:05", "Control de salud", cita2);
+        ConsultaViewController consulta1 = new ConsultaViewController("10-08-2025", "545FDF5","15:05", "Chequeo general", cita1);
+        ConsultaViewController consulta2 = new ConsultaViewController("05-08-2025", "1FD5F15", "12:05", "Control de salud", cita2);
         consultas.add(consulta1);
         consultas.add(consulta2);
 
