@@ -81,7 +81,7 @@ public class App extends Application {
         List<Veterinario> veterinarios = new ArrayList<>();
         List<ConsultaViewController> consultas = new ArrayList<>();
         List<Cita> citas = new ArrayList<>();
-        List<Tratamiento> tratamientos = new ArrayList<>();
+        List<TratamientoViewController> tratamientos = new ArrayList<>();
 
         // Define personas base
         Propietario prop1 = new Propietario("Juan Pérez", "12345678", 317561655, "Cll 35 - 10");
@@ -110,8 +110,8 @@ public class App extends Application {
         mascotas.add(mascota2);
 
         // Crea tratamientos
-        Tratamiento trat1 = new Tratamiento("Vacunación", "Vacuna antirrábica", "350", "DIS");
-        Tratamiento trat2 = new Tratamiento("Desparasitación", "Desparasitación interna","180", "DSA");
+        TratamientoViewController trat1 = new TratamientoViewController("Vacunación", "Vacuna antirrábica", "350", "DIS");
+        TratamientoViewController trat2 = new TratamientoViewController("Desparasitación", "Desparasitación interna","180", "DSA");
         tratamientos.add(trat1);
         tratamientos.add(trat2);
 
