@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.controller.RegistrosController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.PersonasViewController">
    <children>
       <Pane layoutX="26.0" layoutY="24.0" prefHeight="368.0" prefWidth="555.0">
          <children>
@@ -16,10 +16,10 @@
             </Label>
             <ToolBar layoutX="271.0" layoutY="200.0" prefHeight="40.0" prefWidth="262.0">
                <items>
-                  <Button fx:id="BotonAgregar" mnemonicParsing="false" text="Agregar" />
-                  <Button fx:id="BotonEliminar" mnemonicParsing="false" text="Eliminar" />
-                  <Button fx:id="BotonLeer" mnemonicParsing="false" text="Leer" />
-                  <Button fx:id="BotonModificar" mnemonicParsing="false" text="Modificar" />
+                  <Button fx:id="BotonAgregar" mnemonicParsing="false" onAction="#agregarPersona" text="Agregar" />
+                  <Button fx:id="BotonEliminar" mnemonicParsing="false" onAction="#eliminarPersona" text="Eliminar" />
+                  <Button fx:id="BotonLeer" mnemonicParsing="false" onAction="#leerPersona" text="Leer" />
+                  <Button fx:id="BotonModificar" mnemonicParsing="false" onAction="#actualizarPersona" text="Modificar" />
                </items>
             </ToolBar>
             <ChoiceBox id="SeleccionadorTipoPersona" fx:id="SelectorTIpoPersona" layoutX="279.0" layoutY="278.0" prefWidth="150.0" />
@@ -30,16 +30,9 @@
             <Label layoutX="291.0" layoutY="139.0" text="Telefono" />
             <TextField fx:id="EspacioTelefono" layoutX="354.0" layoutY="135.0" prefHeight="25.0" prefWidth="178.0" />
             <Label layoutX="276.0" layoutY="261.0" text="Seleccione el tipo de persona" />
-<<<<<<< HEAD
-            <Button fx:id="BotonCerrar" layoutX="521.0" layoutY="-14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" text="X" textOverrun="WORD_ELLIPSIS">
-=======
-            <Button fx:id="BotobCerrar" layoutX="521.0" layoutY="-14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" text="X" textOverrun="WORD_ELLIPSIS">
->>>>>>> 9e11a08b1019c12c60a7d3496df5c788ce783612
-               <font>
-                  <Font name="Fira Code Bold" size="12.0" />
-               </font>
-            </Button>
          </children>
       </Pane>
+      <Button layoutX="12.0" layoutY="15.0" onAction="#volverAtras" text="Volver"> fx:id="BotonVolver" layoutX="521.0" layoutY="-14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" text="X" textOverrun="WORD_ELLIPSIS">
+            </Button>
    </children>
 </AnchorPane>

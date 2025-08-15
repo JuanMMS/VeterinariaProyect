@@ -87,4 +87,8 @@ public class Mascota {
         this.propietario = propietario;
     }
 
+    public String getNombrePropietario() {
+        return propietario.getNombre();
+    }
+
 }
