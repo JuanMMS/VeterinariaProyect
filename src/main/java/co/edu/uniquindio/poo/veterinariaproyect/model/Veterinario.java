@@ -2,19 +2,17 @@ package co.edu.uniquindio.poo.veterinariaproyect.model;
 
 public class Veterinario extends Persona{
 
-    private String especialidad;
+    private EspecialidadVeterinario especialidad;
     private String licencia;
     private boolean disponibilidad;
 
-    public Veterinario(String nombre, String ID, int telefono, String especialidad, String licencia, boolean disponibilidad) {
+    public Veterinario(String nombre, String ID, int telefono, EspecialidadVeterinario especialidad, String licencia, boolean disponibilidad) {
         super(nombre, ID, telefono);
         this.especialidad = especialidad;
         this.licencia = licencia;
         this.disponibilidad = disponibilidad;
 
     }
-
-
     /**
      * Metodo para ver el historial que lleva el toString de la consuta y el tratamiento
      * @param clinica
@@ -48,14 +46,14 @@ public class Veterinario extends Persona{
     Metodos getter y setter de la clase Veterinario
      */
 
-    public String getEspecialidad() {
+    public EspecialidadVeterinario getEspecialidad() {
         return especialidad;
     }
 
     /*
     Metodos getter y setter de la clase Veterinario
      */
-    public void setEspecialidad(String especialidad) {
+    public void setEspecialidad(EspecialidadVeterinario especialidad) {
         this.especialidad = especialidad;
     }
 
@@ -85,6 +83,10 @@ public class Veterinario extends Persona{
      */
     public void setDisponibilidad(boolean disponibilidad) {
         this.disponibilidad = disponibilidad;
+    }
+    @Override
+    public String getRol() {
+        return "Veterinario";
     }
 
 }

@@ -10,7 +10,6 @@ public class Propietario extends Persona {
 
     }
 
-
     /*
     Metodos getter y setter de la clase Propietario
      */
@@ -25,7 +24,9 @@ public class Propietario extends Persona {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-=======
-
+    @Override
+    public String getRol() {
+        return "Propietario";
+    }
 
 }

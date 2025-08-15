@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.CitasViewController">
+   <children>
+      <ListView id="ListCitas" layoutX="21.0" layoutY="75.0" prefHeight="316.0" prefWidth="298.0" />
+      <Label layoutX="21.0" layoutY="11.0" text="Control de citas">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <ToolBar layoutX="327.0" layoutY="244.0" prefHeight="52.0" prefWidth="257.0">
+        <items>
+          <Button fx:id="BotonAgregar" mnemonicParsing="false" text="Agregar" />
+            <Button fx:id="BotonEliminar" mnemonicParsing="false" text="Eliminar" />
+            <Button fx:id="BotonLeer" mnemonicParsing="false" text="Leer" />
+            <Button fx:id="BotonModificar" mnemonicParsing="false" text="Modificar" />
+        </items>
+      </ToolBar>
+      <Label layoutX="346.0" layoutY="97.0" text="Fecha:">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="350.0" layoutY="137.0" text="Hora:">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="346.0" layoutY="178.0" text="Lugar:">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField id="IntroducirFecha" layoutX="422.0" layoutY="101.0" />
+      <TextField id="IntroducirHora" layoutX="422.0" layoutY="141.0" />
+      <ChoiceBox id="SeleccionarLugar" layoutX="422.0" layoutY="182.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

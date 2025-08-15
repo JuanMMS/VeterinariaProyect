@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.PersonasViewController">
+   <children>
+      <VBox alignment="TOP_LEFT" layoutX="12.0" layoutY="15.0" prefHeight="470.0" prefWidth="255.0">
+         <children>
+            <Button fx:id="BotonVolver" mnemonicParsing="false" onAction="#volverAtras" text="Volver" />
+            <TableView fx:id="TablaPersonas" prefHeight="420.0" prefWidth="243.0" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="nombreColumn" prefWidth="99.0" text="Nombre" />
+                  <TableColumn fx:id="idColumn" prefWidth="65.0" text="ID" />
+                  <TableColumn fx:id="rolColumn" prefWidth="85.0" text="Rol" />
+               </columns>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TableView>
+         </children>
+      </VBox>
+      <VBox layoutX="296.0" layoutY="15.0" prefHeight="470.0" prefWidth="480.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="480.0" text="Gestión de Personas">
+               <font>
+                  <Font name="Wingdings 2" size="28.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="480.0">
+               <children>
+                  <Label prefWidth="169.0" text="Seleccione el tipo de persona" />
+                  <ChoiceBox fx:id="SelectorTipoPersona" prefHeight="25.0" prefWidth="178.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <GridPane fx:id="camposComunes" hgap="5.0" vgap="10.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="280.0" />
+               </columnConstraints>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Nombre:" />
+                  <TextField fx:id="EspacioNombre" disable="true" GridPane.columnIndex="1" />
+                  <Label text="ID:" GridPane.rowIndex="1" />
+                  <TextField fx:id="EspacioID" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Teléfono:" GridPane.rowIndex="2" />
+                  <TextField fx:id="EspacioTelefono" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <VBox fx:id="camposPropietario" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="480.0" visible="false">
+               <children>
+                  <GridPane hgap="5.0" vgap="10.0">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="280.0" />
+                     </columnConstraints>
+                     <children>
+                        <Label text="Dirección:" />
+                        <TextField fx:id="campoDireccion" GridPane.columnIndex="1" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </GridPane>
+               </children>
+            </VBox>
+            <VBox fx:id="camposVeterinario" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="480.0" visible="false">
+               <children>
+                  <GridPane hgap="5.0" vgap="10.0">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="280.0" />
+                     </columnConstraints>
+                     <children>
+                        <Label text="Licencia:" />
+                        <TextField fx:id="campoLicencia" GridPane.columnIndex="1" />
+                        <Label text="Especialidad:" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="campoEspecialidad" prefWidth="280.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Disponibilidad:" GridPane.rowIndex="2" />
+                        <Label fx:id="labelDisponibilidad" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </GridPane>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="480.0" spacing="5.0">
+               <children>
+                  <Button fx:id="BotonAgregar" disable="true" mnemonicParsing="false" onAction="#agregarPersona" text="Agregar" />
+                  <Button fx:id="BotonEliminar" disable="true" mnemonicParsing="false" onAction="#eliminarPersona" text="Eliminar" />
+                  <Button fx:id="BotonModificar" disable="true" mnemonicParsing="false" onAction="#actualizarPersona" text="Modificar" />
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+
+      </Pane>
+      <Button layoutX="4.0" onAction="#volverAtras" text="Volver"> fx:id="BotonVolver" layoutX="521.0" layoutY="-14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" text="X" textOverrun="WORD_ELLIPSIS">
+            </Button>
+
+      </VBox>
+
+   </children>
+</AnchorPane>

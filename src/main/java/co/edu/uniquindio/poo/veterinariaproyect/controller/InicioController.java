@@ -1,31 +1,27 @@
 package co.edu.uniquindio.poo.veterinariaproyect.controller;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
+
+import co.edu.uniquindio.poo.veterinariaproyect.App;
+import javafx.fxml.FXML;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
+
+
+
+
+
+
 
 public class InicioController {
 
-    private Stage primaryStage;
-
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }
-
     @FXML
-    private void abrirLogin() {
+    private void iniciarMenu(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/veterinariaproyect/fxml/menu.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Iniciar Sesión");
-            stage.show();
+            // Llama a tu método centralizado para cambiar la escena a la del menú principal
+            App.cambiarEscena("menu.fxml");
         } catch (IOException e) {
             e.printStackTrace();
+            // Aquí puedes manejar el error, por ejemplo, mostrando una alerta
         }
     }
 }

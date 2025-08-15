@@ -16,72 +16,43 @@ public class Consulta {
         this.cita = cita;
     }
 
-    /*
-    Metodos getter and setter de la clase Consulta
-     */
+    // Metodos getter and setter de la clase Consulta
     public String getFecha() {
         return fecha;
     }
 
-    /*
-    Metodos getter and setter de la clase Consulta
-     */
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    /*
-    Metodos getter and setter de la clase Consulta
-     */
     public String getID() {
         return ID;
     }
 
-    /*
-    Metodos getter and setter de la clase Consulta
-     */
-    public void setiD(String ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
-    /*
-    Metodos getter and setter de la clase Consulta
-     */
     public String getHora() {
         return hora;
     }
 
-    /*
-    Metodos getter and setter de la clase Consulta
-     */
     public void setHora(String hora) {
         this.hora = hora;
     }
 
-    /*
-    Metodos getter and setter de la clase Consulta
-     */
     public String getMotivo() {
         return motivo;
     }
 
-    /*
-    Metodos getter and setter de la clase Consulta
-     */
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
 
-    /*
-    Metodos getter and setter de la clase Consulta
-     */
     public Cita getCita() {
         return cita;
     }
 
-    /*
-    Metodos getter and setter de la clase Consulta
-     */
     public void setCita(Cita cita) {
         this.cita = cita;
     }
@@ -96,5 +67,4 @@ public class Consulta {
                 ", cita=" + cita +
                 '}';
     }
-
 }
