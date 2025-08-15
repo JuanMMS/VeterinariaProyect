@@ -97,7 +97,6 @@
                <children>
                   <Button fx:id="BotonAgregar" disable="true" mnemonicParsing="false" onAction="#agregarPersona" text="Agregar" />
                   <Button fx:id="BotonEliminar" disable="true" mnemonicParsing="false" onAction="#eliminarPersona" text="Eliminar" />
-                  <Button fx:id="BotonLeer" disable="true" mnemonicParsing="false" onAction="#leerPersona" text="Leer" />
                   <Button fx:id="BotonModificar" disable="true" mnemonicParsing="false" onAction="#actualizarPersona" text="Modificar" />
                </children>
                <VBox.margin>

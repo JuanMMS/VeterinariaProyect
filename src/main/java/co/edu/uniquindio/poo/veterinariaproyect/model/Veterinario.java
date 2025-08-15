@@ -86,7 +86,7 @@ public class Veterinario extends Persona{
     }
     @Override
     public String getRol() {
-        return "Propietario";
+        return "Veterinario";
     }
 
 }
