@@ -12,69 +12,37 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 import java.awt.*;
+import java.util.Optional;
 
 public class TratamientoController {
-    @FXML private Button BotonAceptar;
-    @FXML private TextField IntroducirID;
-    @FXML private TextField IntroducirNombre;
-    @FXML private TextField IntroducirDuracion;
-    @FXML private TextField IntroducirMedicamento;
 
-    private TratamientoController tratamientoController;
+    /**
+     * Creates a new Treatment instance and saves it to the main application model.
+     * This method validates if a treatment with the same ID already exists before creating.
+     * @param id The ID of the treatment.
+     * @param nombre The name of the treatment.
+     * @param duracion The duration of the treatment.
+     * @param medicamento The medication prescribed.
+     * @return The created Treatment object if successful, or null if a treatment with the same ID already exists.
+     */
+    public Tratamiento crearTratamiento(String id, String nombre, String duracion, String medicamento) {
+        // Search for an existing treatment with the same ID.
+        Optional<Tratamiento> tratamientoExistente = App.clinica1.getListTratamientos().stream()
+                .filter(t -> t.ID().equals(id))
+                .findFirst();
 
-    @FXML
-    public void initialize() {
-        tratamientoController = new TratamientoController();
-        habilitarCampos(false);
-        BotonAceptar.setDisable(true);
-
-    }
-    private void habilitarCampos(boolean estado) {
-        IntroducirID.setDisable(!estado);
-        IntroducirNombre.setDisable(!estado);
-        IntroducirDuracion.setDisable(!estado);
-        IntroducirMedicamento.setDisable(!estado);
-
-    }
-
-    public void crearTratamiento(){
-        String ID = IntroducirID.getText();
-        String Nombre = IntroducirNombre.getText();
-        String Duracion = IntroducirDuracion.getText();
-        String Medicamento = IntroducirMedicamento.getText();
-
-        // Validación 1: Campos vacíos
-        if (ID.isEmpty() || Nombre.isEmpty() || Duracion.isEmpty() || Medicamento.isEmpty()) {
-            System.out.println("Error: Todos los campos son obligatorios.");
-            // Aquí puedes mostrar un cuadro de diálogo al usuario
-            return;
+        // If a treatment with this ID already exists, return null to indicate failure.
+        if (tratamientoExistente.isPresent()) {
+            return null;
         }
 
-        // Validación 2: Formato del ID
-        int id;
-        try {
-            id = Integer.parseInt(ID);
-        } catch (NumberFormatException e) {
-            System.out.println("Error: El ID debe ser un número entero.");
-            return;
-        }
+        // Create a new Treatment object.
+        Tratamiento nuevoTratamiento = new Tratamiento(id, nombre, duracion, medicamento);
 
-        // Validación 3: Formato y valor de la Duración
-        int duracion;
-        try {
-            duracion = Integer.parseInt(Duracion);
-            if (duracion <= 0) {
-                System.out.println("Error: La duración debe ser un número positivo.");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Error: La duración debe ser un número entero.");
-            return;
-        }
+        // Add the new treatment to the list in the main application model (Clinica).
+        App.clinica1.getListTratamientos().add(nuevoTratamiento);
 
-        // Si todas las validaciones pasan, se puede proceder a crear el objeto Tratamiento
-        // Tratamiento nuevoTratamiento = new Tratamiento(id, Nombre, duracion, Medicamento);
-        System.out.println("Tratamiento creado exitosamente.");
+        // Return the newly created object.
+        return nuevoTratamiento;
     }
-    }
-
+}
