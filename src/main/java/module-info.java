@@ -10,4 +10,6 @@ module co.edu.uniquindio.poo.veterinariaproyect {
     opens co.edu.uniquindio.poo.veterinariaproyect.model to javafx.base;
     opens co.edu.uniquindio.poo.veterinariaproyect.viewController to javafx.fxml;
     exports co.edu.uniquindio.poo.veterinariaproyect.viewController;
+    exports co.edu.uniquindio.poo.veterinariaproyect.controller;
+
 }
