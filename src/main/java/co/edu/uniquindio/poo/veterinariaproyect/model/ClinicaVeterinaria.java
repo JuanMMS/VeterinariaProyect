@@ -217,6 +217,16 @@ public class ClinicaVeterinaria {
         return citasEncontradas;
 }
 
-
-
+    @Override
+    public String toString() {
+        return "ClinicaVeterinaria{" +
+                "nombre='" + nombre + '\'' +
+                ", ID='" + ID + '\'' +
+                ", listPersonas=" + listPersonas +
+                ", listMascotas=" + listMascotas +
+                ", listConsultas=" + listConsultas +
+                ", listCitas=" + listCitas +
+                ", listTratamientos=" + listTratamientos +
+                '}';
+    }
 }
