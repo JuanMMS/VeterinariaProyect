@@ -15,7 +15,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,7 +23,6 @@ import java.util.List;
 
 public class CitasViewController implements Initializable {
 
-    // TableView y sus columnas para mostrar los datos de la cita
     @FXML private TableView<Cita> tablaCitas;
     @FXML private TableColumn<Cita, String> columnaID;
     @FXML private TableColumn<Cita, String> columnaFecha;
@@ -35,13 +33,11 @@ public class CitasViewController implements Initializable {
     @FXML private TableColumn<Cita, String> columnaPropietario;
     @FXML private TableColumn<Cita, String> columnaPersonalApoyo;
 
-    // Campos de entrada de datos para el CRUD
     @FXML private TextField introducirFecha;
     @FXML private TextField introducirHora;
     @FXML private ComboBox<LugarCita> seleccionarLugar;
     @FXML private TextField introducirID;
 
-    // ComboBoxes para seleccionar personas y mascotas
     @FXML private ComboBox<Veterinario> seleccionarVeterinario;
     @FXML private ComboBox<Mascota> seleccionarMascota;
     @FXML private ComboBox<Propietario> seleccionarPropietario;
@@ -55,13 +51,11 @@ public class CitasViewController implements Initializable {
         this.citasController = new CitasController();
         this.listCitasObservable = citasController.obtenerTodasLasCitas();
 
-        // Configurar las columnas de la tabla para que muestren los datos
         columnaID.setCellValueFactory(new PropertyValueFactory<>("IDCita"));
         columnaFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         columnaHora.setCellValueFactory(new PropertyValueFactory<>("hora"));
         columnaLugar.setCellValueFactory(new PropertyValueFactory<>("lugarCita"));
 
-        // Uso de PropertyValueFactory con los métodos getNombre... de la clase Cita
         columnaVeterinario.setCellValueFactory(new PropertyValueFactory<>("nombreVeterinario"));
         columnaMascota.setCellValueFactory(new PropertyValueFactory<>("nombreMascota"));
         columnaPropietario.setCellValueFactory(new PropertyValueFactory<>("nombrePropietario"));
@@ -69,13 +63,11 @@ public class CitasViewController implements Initializable {
 
         tablaCitas.setItems(listCitasObservable);
 
-        // Llenar los ComboBox con los valores del enum y las listas filtradas
         seleccionarLugar.setItems(FXCollections.observableArrayList(LugarCita.values()));
 
         List<Persona> allPersonasList = App.clinica1.getListPersonas();
         ObservableList<Persona> allPersonasObservable = FXCollections.observableArrayList(allPersonasList);
 
-        // Filtrar personas usando el método getRol()
         ObservableList<Veterinario> veterinarios = allPersonasObservable.stream()
                 .filter(p -> "Veterinario".equals(p.getRol()))
                 .map(p -> (Veterinario) p)
@@ -94,10 +86,8 @@ public class CitasViewController implements Initializable {
         seleccionarVeterinario.setItems(veterinarios);
         seleccionarPropietario.setItems(propietarios);
         seleccionarPersonalApoyo.setItems(personalApoyo);
-
         seleccionarMascota.setItems(FXCollections.observableArrayList(App.clinica1.getListMascotas()));
 
-        // Configurar los StringConverter para los ComboBoxes
         seleccionarVeterinario.setConverter(new StringConverter<>() {
             @Override
             public String toString(Veterinario vet) {
@@ -142,7 +132,6 @@ public class CitasViewController implements Initializable {
             }
         });
 
-        // Listener para cargar datos de la cita seleccionada en la tabla
         tablaCitas.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newCita) -> {
             if (newCita != null) {
                 introducirFecha.setText(newCita.getFecha());
@@ -168,16 +157,26 @@ public class CitasViewController implements Initializable {
         Mascota mascota = seleccionarMascota.getValue();
         Propietario propietario = seleccionarPropietario.getValue();
         PersonalApoyo personalApoyo = seleccionarPersonalApoyo.getValue();
+        String idCita = introducirID.getText();
 
-        if (fecha.isEmpty() || hora.isEmpty() || lugarCita == null || veterinario == null || mascota == null || propietario == null || personalApoyo == null) {
+        if (fecha.isEmpty() || hora.isEmpty() || lugarCita == null || veterinario == null || mascota == null || propietario == null || personalApoyo == null || idCita.isEmpty()) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error", "Todos los campos son obligatorios.");
             return;
         }
 
-        citasController.crearNuevaCita(fecha, hora, lugarCita, veterinario, mascota, propietario, personalApoyo);
-        limpiarCampos();
-        tablaCitas.refresh(); // Refrescar la tabla
-        mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Cita agregada exitosamente.");
+        boolean citaAgregada = citasController.crearNuevaCita(idCita, fecha, hora, lugarCita, veterinario, mascota, propietario, personalApoyo);
+
+        if (citaAgregada) {
+            // Si la cita se agregó exitosamente al modelo, actualiza la lista observable
+            listCitasObservable = citasController.obtenerTodasLasCitas();
+            tablaCitas.setItems(listCitasObservable);
+
+            limpiarCampos();
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Cita agregada exitosamente.");
+        } else {
+            // Si la cita no se agregó (por duplicidad), muestra una alerta de error
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "Datos duplicados. Ya existe una cita con los mismos parámetros.");
+        }
     }
 
     @FXML
@@ -185,8 +184,12 @@ public class CitasViewController implements Initializable {
         Cita selectedItem = tablaCitas.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             citasController.eliminarCita(selectedItem);
+
+            // Refresca la lista observable después de eliminar
+            listCitasObservable = citasController.obtenerTodasLasCitas();
+            tablaCitas.setItems(listCitasObservable);
+
             limpiarCampos();
-            tablaCitas.refresh(); // Refrescar la tabla
             mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Cita eliminada.");
         } else {
             mostrarAlerta(Alert.AlertType.ERROR, "Error", "Por favor, seleccione una cita para eliminar.");
@@ -263,6 +266,7 @@ public class CitasViewController implements Initializable {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+
     @FXML
     public void volverAtras() throws IOException {
         App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/menu.fxml");

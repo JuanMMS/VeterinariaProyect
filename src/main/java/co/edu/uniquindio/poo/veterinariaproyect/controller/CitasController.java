@@ -13,14 +13,18 @@ public class CitasController {
         return FXCollections.observableArrayList(citas);
     }
 
-    public void crearNuevaCita(String fecha, String hora, LugarCita lugarCita, Veterinario veterinario, Mascota mascota, Propietario propietario, PersonalApoyo personalApoyo) {
-        String id = "CITA-" + (App.clinica1.getListCitas().size() + 1);
+    // Este método ahora devuelve un booleano para indicar si la cita se agregó o no.
+    public boolean crearNuevaCita(String id, String fecha, String hora, LugarCita lugarCita, Veterinario veterinario, Mascota mascota, Propietario propietario, PersonalApoyo personalApoyo) {
         Cita nuevaCita = new Cita(id, fecha, hora, lugarCita, veterinario, mascota, propietario, personalApoyo);
-        App.clinica1.getListCitas().add(nuevaCita);
+
+        // agendarCita devuelve true si se agrega, y false si hay un duplicado.
+        boolean citaAgendada = personalApoyo.agendarCita(nuevaCita, App.clinica1);
+
+        return citaAgendada;
     }
 
     public void eliminarCita(Cita cita) {
-        App.clinica1.getListCitas().remove(cita);
+        App.clinica1.eliminarCitas(cita);
     }
 
     public void actualizarCita(Cita citaOriginal, String nuevaFecha, String nuevaHora, LugarCita nuevoLugar, Veterinario nuevoVeterinario, Mascota nuevaMascota, Propietario nuevoPropietario, PersonalApoyo nuevoPersonalApoyo, String nuevoID) {
