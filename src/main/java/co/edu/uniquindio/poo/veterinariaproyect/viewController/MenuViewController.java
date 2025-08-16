@@ -56,7 +56,7 @@ public class MenuViewController {
     }
     @FXML
     private void onCitasClick() throws IOException {
-        App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/agenda.fxml");
+        App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/citas.fxml");
     }
     @FXML
     private void onPersonalClick() throws IOException {

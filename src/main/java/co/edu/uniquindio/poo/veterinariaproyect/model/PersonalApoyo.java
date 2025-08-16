@@ -36,7 +36,7 @@ public class PersonalApoyo extends Persona {
 
     @Override
     public String getRol() {
-        return "Es Personal de Apoyo.";
+        return "Personal Apoyo";
     }
 
 }
