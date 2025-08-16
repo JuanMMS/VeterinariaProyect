@@ -7,13 +7,15 @@ public class Consulta {
     private String hora;
     private String motivo;
     private Cita cita;
+    private Tratamiento tratamiento;
 
-    public Consulta(String fecha, String ID, String hora, String motivo, Cita cita) {
+    public Consulta(String fecha, String ID, String hora, String motivo, Cita cita, Tratamiento tratamiento) {
         this.fecha = fecha;
         this.ID = ID;
         this.hora = hora;
         this.motivo = motivo;
         this.cita = cita;
+        this.tratamiento = tratamiento;
     }
 
     // Metodos getter and setter de la clase Consulta
@@ -55,6 +57,12 @@ public class Consulta {
 
     public void setCita(Cita cita) {
         this.cita = cita;
+    }
+    public Tratamiento getTratamiento() {
+        return tratamiento;
+    }
+    public void setTratamiento(Tratamiento tratamiento) {
+        this.tratamiento = tratamiento;
     }
 
     @Override

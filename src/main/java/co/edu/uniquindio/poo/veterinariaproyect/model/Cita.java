@@ -146,6 +146,10 @@ public class Cita {
         return this.veterinario.getNombre();
     }
 
+    public String getNombrePersonalApoyo() {
+        return (personalApoyo != null) ? personalApoyo.getNombre() : "N/A";
+    }
+
 }
 
 

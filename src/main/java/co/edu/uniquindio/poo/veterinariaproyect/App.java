@@ -122,8 +122,8 @@ public class App extends Application {
         citas.add(cita2);
 
         // Define consultas
-        Consulta consulta1 = new Consulta("10-08-2025", "545FDF5","15:05", "Chequeo general", cita1);
-        Consulta consulta2 = new Consulta("05-08-2025", "1FD5F15", "12:05", "Control de salud", cita2);
+        Consulta consulta1 = new Consulta("10-08-2025", "545FDF5","15:05", "Chequeo general", cita1, trat1);
+        Consulta consulta2 = new Consulta("05-08-2025", "1FD5F15", "12:05", "Control de salud", cita2, trat2);
         consultas.add(consulta1);
         consultas.add(consulta2);
 
