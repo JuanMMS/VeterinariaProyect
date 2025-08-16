@@ -145,6 +145,7 @@ public class Cita {
     public String getNombreVeterinario() {
         return this.veterinario.getNombre();
     }
+
 }
 
 
