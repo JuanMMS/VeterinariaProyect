@@ -43,8 +43,6 @@ public class CitasViewController implements Initializable {
     @FXML private ComboBox<Propietario> seleccionarPropietario;
     @FXML private ComboBox<PersonalApoyo> seleccionarPersonalApoyo;
 
-    @FXML private Button BotonGestionConsulta;
-
     private CitasController citasController;
     private ObservableList<Cita> listCitasObservable;
 
@@ -53,7 +51,6 @@ public class CitasViewController implements Initializable {
         this.citasController = new CitasController();
         this.listCitasObservable = FXCollections.observableArrayList(citasController.obtenerTodasLasCitas());
 
-        // Configuración de las columnas de la tabla
         columnaID.setCellValueFactory(new PropertyValueFactory<>("IDCita"));
         columnaFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         columnaHora.setCellValueFactory(new PropertyValueFactory<>("hora"));
@@ -64,10 +61,8 @@ public class CitasViewController implements Initializable {
         columnaPersonalApoyo.setCellValueFactory(new PropertyValueFactory<>("nombrePersonalApoyo"));
         tablaCitas.setItems(listCitasObservable);
 
-        // Llenar ComboBox de LugarCita
         seleccionarLugar.setItems(FXCollections.observableArrayList(LugarCita.values()));
 
-        // Llenar ComboBoxes de Personas y Mascotas
         List<Persona> allPersonasList = App.clinica1.getListPersonas();
         ObservableList<Persona> allPersonasObservable = FXCollections.observableArrayList(allPersonasList);
 
@@ -91,7 +86,6 @@ public class CitasViewController implements Initializable {
         seleccionarPersonalApoyo.setItems(personalApoyo);
         seleccionarMascota.setItems(FXCollections.observableArrayList(App.clinica1.getListMascotas()));
 
-        // Configurar los StringConverter de forma más robusta
         seleccionarVeterinario.setConverter(new StringConverter<>() {
             @Override
             public String toString(Veterinario vet) {
@@ -148,7 +142,6 @@ public class CitasViewController implements Initializable {
             }
         });
 
-        // Listener para la selección en la tabla
         tablaCitas.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newCita) -> {
             if (newCita != null) {
                 introducirFecha.setText(newCita.getFecha());
@@ -253,6 +246,8 @@ public class CitasViewController implements Initializable {
             stage.setScene(new Scene(root));
             stage.setTitle("Gestión de Consultas");
             stage.show();
+            // Cierra la ventana actual de Citas, si es deseado
+            // ((Node) event.getSource()).getScene().getWindow().hide();
         } catch (IOException e) {
             e.printStackTrace();
             mostrarAlerta(Alert.AlertType.ERROR, "Error", "No se pudo cargar la ventana de consultas.");

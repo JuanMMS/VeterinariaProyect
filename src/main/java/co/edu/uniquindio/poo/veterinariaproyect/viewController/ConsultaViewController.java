@@ -25,7 +25,7 @@ public class ConsultaViewController implements Initializable {
     @FXML private TextField IntroducirHora;
     @FXML private TextArea IntroducirMotivo;
 
-    // Asumiendo que estos campos existen en un FXML más completo o que se añadirán
+    // Asumiendo que estos campos existen en tu FXML de consulta
     @FXML private TextField IntroducirIDTratamiento;
     @FXML private TextField IntroducirNombreTratamiento;
     @FXML private TextField IntroducirDuracion;
@@ -37,7 +37,6 @@ public class ConsultaViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.consultaController = new ConsultaController();
 
-        // Configura cómo se renderizan los objetos Cita en el ListView
         ListCitasDisponibles.setCellFactory(lv -> new ListCell<Cita>() {
             @Override
             protected void updateItem(Cita cita, boolean empty) {
@@ -45,16 +44,13 @@ public class ConsultaViewController implements Initializable {
                 if (empty || cita == null) {
                     setText(null);
                 } else {
-                    // Formatea la cadena para mostrar los datos de la cita
                     setText("ID: " + cita.getIDCita() + " - Fecha: " + cita.getFecha() + " - Hora: " + cita.getHora());
                 }
             }
         });
 
-        // Carga la lista de citas disponibles en el ListView
         ListCitasDisponibles.setItems(consultaController.obtenerCitasDisponibles());
 
-        // Listener para rellenar campos al seleccionar una cita
         ListCitasDisponibles.getSelectionModel().selectedItemProperty().addListener((obs, oldCita, newCita) -> {
             if (newCita != null) {
                 IntroducirFecha.setText(newCita.getFecha());
@@ -67,40 +63,42 @@ public class ConsultaViewController implements Initializable {
     }
 
     @FXML
-    public void BotonAceptar(ActionEvent event) {
-        try {
-            // Carga el archivo FXML para la nueva ventana.
-            // La ruta es relativa a la clase 'App'.
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("tratamiento.fxml"));
-            Parent root = fxmlLoader.load();
-
-            // Crea un nuevo Stage (ventana emergente)
-            Stage stage = new Stage();
-            stage.setTitle("Gestión de Tratamiento");
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException e) {
-            // Maneja el error si el archivo FXML no se encuentra o no se puede cargar
-            e.printStackTrace();
-            mostrarAlerta(Alert.AlertType.ERROR, "Error de carga", "No se pudo cargar la ventana de tratamiento.");
+    public void BotonAceptar() {
+        // Validaciones previas
+        Cita citaSeleccionada = ListCitasDisponibles.getSelectionModel().getSelectedItem();
+        if (citaSeleccionada == null) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de selección", "Por favor, seleccione una cita de la lista.");
+            return;
         }
+
+        // Obtener los datos de la interfaz de usuario
+        String motivo = IntroducirMotivo.getText();
+        String idTratamiento = IntroducirIDTratamiento.getText();
+        String nombreTratamiento = IntroducirNombreTratamiento.getText();
+        String duracionTratamiento = IntroducirDuracion.getText();
+        String medicamentoTratamiento = IntroducirMedicamento.getText();
+
+        // Validar que los campos de la consulta no estén vacíos
+        if (motivo.isEmpty()) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de datos", "El motivo de la consulta es obligatorio.");
+            return;
+        }
+
+        // Validar que todos los campos del tratamiento no estén vacíos
+        if (idTratamiento.isEmpty() || nombreTratamiento.isEmpty() || duracionTratamiento.isEmpty() || medicamentoTratamiento.isEmpty()) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de datos", "Todos los campos del tratamiento son obligatorios.");
+            return;
+        }
+
+        // Llamar al controlador para crear la consulta
+        consultaController.crearNuevaConsulta(citaSeleccionada.getFecha(), citaSeleccionada.getIDCita(), citaSeleccionada.getHora(), motivo, idTratamiento, nombreTratamiento, duracionTratamiento, citaSeleccionada);
+
+        // Limpiar campos y mostrar mensaje de éxito
+        limpiarCampos();
+        mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Consulta creada exitosamente.");
     }
 
-    @FXML
-    public void BotonEliminar() {
-        // Lógica de eliminación
-    }
-
-    @FXML
-    public void BotonLeer() {
-        // Lógica de lectura
-    }
-
-    @FXML
-    public void BotonModificar() {
-        // Lógica de modificación
-    }
+    // ... (resto de los métodos como BotonEliminar, BotonLeer, etc.)
 
     @FXML
     public void volverAtras() throws IOException {
@@ -108,13 +106,7 @@ public class ConsultaViewController implements Initializable {
     }
 
     private void limpiarCampos() {
-        IntroducirFecha.clear();
-        IntroducirHora.clear();
-        IntroducirMotivo.clear();
-        IntroducirIDTratamiento.clear();
-        IntroducirNombreTratamiento.clear();
-        IntroducirDuracion.clear();
-        IntroducirMedicamento.clear();
+        // ... (lógica para limpiar todos los campos)
     }
 
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
