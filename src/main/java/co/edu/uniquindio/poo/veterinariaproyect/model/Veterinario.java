@@ -89,4 +89,13 @@ public class Veterinario extends Persona{
         return "Veterinario";
     }
 
+    @Override
+    public String toString() {
+        return "Veterinario{" +
+                "especialidad=" + especialidad +
+                ", licencia='" + licencia + '\'' +
+                ", disponibilidad=" + disponibilidad +
+                '}';
+    }
+
 }

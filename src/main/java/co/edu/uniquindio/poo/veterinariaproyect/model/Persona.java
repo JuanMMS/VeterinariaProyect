@@ -39,4 +39,13 @@ public abstract class Persona {
     // Este método es abstracto y debe ser implementado por cada clase hija.
     public abstract String getRol();
 
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "nombre='" + nombre + '\'' +
+                ", ID='" + ID + '\'' +
+                ", telefono=" + telefono +
+                '}';
+    }
+
 }
