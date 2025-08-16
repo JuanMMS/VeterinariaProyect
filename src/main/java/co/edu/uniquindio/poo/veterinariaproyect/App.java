@@ -79,9 +79,9 @@ public class App extends Application {
         List<PersonalApoyo> personalApoyo = new ArrayList<>();
         List<Propietario> propietarios = new ArrayList<>();
         List<Veterinario> veterinarios = new ArrayList<>();
-        List<ConsultaViewController> consultas = new ArrayList<>();
+        List<Consulta> consultas = new ArrayList<>();
         List<Cita> citas = new ArrayList<>();
-        List<TratamientoViewController> tratamientos = new ArrayList<>();
+        List<Tratamiento> tratamientos = new ArrayList<>();
 
         // Define personas base
         Propietario prop1 = new Propietario("Juan Pérez", "12345678", 317561655, "Cll 35 - 10");
@@ -110,8 +110,8 @@ public class App extends Application {
         mascotas.add(mascota2);
 
         // Crea tratamientos
-        TratamientoViewController trat1 = new TratamientoViewController("Vacunación", "Vacuna antirrábica", "350", "DIS");
-        TratamientoViewController trat2 = new TratamientoViewController("Desparasitación", "Desparasitación interna","180", "DSA");
+        Tratamiento trat1 = new Tratamiento("Vacunación", "Vacuna antirrábica", "350", "DIS");
+        Tratamiento trat2 = new Tratamiento("Desparasitación", "Desparasitación interna","180", "DSA");
         tratamientos.add(trat1);
         tratamientos.add(trat2);
 
@@ -122,8 +122,8 @@ public class App extends Application {
         citas.add(cita2);
 
         // Define consultas
-        ConsultaViewController consulta1 = new ConsultaViewController("10-08-2025", "545FDF5","15:05", "Chequeo general", cita1);
-        ConsultaViewController consulta2 = new ConsultaViewController("05-08-2025", "1FD5F15", "12:05", "Control de salud", cita2);
+        Consulta consulta1 = new Consulta("10-08-2025", "545FDF5","15:05", "Chequeo general", cita1);
+        Consulta consulta2 = new Consulta("05-08-2025", "1FD5F15", "12:05", "Control de salud", cita2);
         consultas.add(consulta1);
         consultas.add(consulta2);
 

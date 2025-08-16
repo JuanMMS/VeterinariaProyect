@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.PersonasViewController">
    <children>
@@ -54,6 +54,11 @@
                   <Label text="Teléfono:" GridPane.rowIndex="2" />
                   <TextField fx:id="EspacioTelefono" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
             </GridPane>
             <VBox fx:id="camposPropietario" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="480.0" visible="false">
                <children>
@@ -69,6 +74,9 @@
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
                   </GridPane>
                </children>
             </VBox>
@@ -90,6 +98,11 @@
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
+                     <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                     </rowConstraints>
                   </GridPane>
                </children>
             </VBox>
@@ -105,11 +118,6 @@
             </HBox>
          </children>
 
-      </Pane>
-      <Button layoutX="4.0" onAction="#volverAtras" text="Volver"> fx:id="BotonVolver" layoutX="521.0" layoutY="-14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" text="X" textOverrun="WORD_ELLIPSIS">
-            </Button>
-
       </VBox>
-
-   </children>
+      </children>
 </AnchorPane>
