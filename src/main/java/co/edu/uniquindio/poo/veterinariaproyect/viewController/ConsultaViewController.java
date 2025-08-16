@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.veterinariaproyect.viewController;
 
+import co.edu.uniquindio.poo.veterinariaproyect.App;
 import co.edu.uniquindio.poo.veterinariaproyect.controller.ConsultaController;
 import co.edu.uniquindio.poo.veterinariaproyect.model.Consulta;
 import co.edu.uniquindio.poo.veterinariaproyect.model.Cita;
@@ -9,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -20,7 +23,11 @@ public class ConsultaViewController implements Initializable {
     @FXML private TextField IntroducirFecha;
     @FXML private TextField IntroducirHora;
     @FXML private TextArea IntroducirMotivo;
-    @FXML private TextArea IntroducirTratamiento;
+
+    @FXML private TextField IntroducirIDTratamiento; // Nuevo campo para el ID del tratamiento
+    @FXML private TextField IntroducirNombreTratamiento; // Nuevo campo para el nombre
+    @FXML private TextField IntroducirDuracion; // Nuevo campo para la duración
+    @FXML private TextField IntroducirMedicamento; // Nuevo campo para el medicamento
 
     private ConsultaController consultaController;
     private ObservableList<Consulta> listaConsultasObservable;
@@ -30,18 +37,28 @@ public class ConsultaViewController implements Initializable {
         this.consultaController = new ConsultaController();
         this.listaConsultasObservable = consultaController.obtenerTodasLasConsultas();
 
-        // Asumiendo que tu CitaController carga las citas disponibles
         ListCitasDisponibles.setItems(consultaController.obtenerCitasDisponibles());
-
         ListConsultasRealizadas.setItems(listaConsultasObservable);
 
-        // Listener para poblar los campos al seleccionar una consulta
+        ListCitasDisponibles.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newCita) -> {
+            if (newCita != null) {
+                IntroducirFecha.setText(newCita.getFecha());
+                IntroducirHora.setText(newCita.getHora());
+            } else {
+                IntroducirFecha.clear();
+                IntroducirHora.clear();
+            }
+        });
+
         ListConsultasRealizadas.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newConsulta) -> {
             if (newConsulta != null) {
                 IntroducirFecha.setText(newConsulta.getFecha());
                 IntroducirHora.setText(newConsulta.getHora());
                 IntroducirMotivo.setText(newConsulta.getMotivo());
-                IntroducirTratamiento.setText(newConsulta.getTratamiento());
+                IntroducirIDTratamiento.setText(newConsulta.getTratamiento().ID());
+                IntroducirNombreTratamiento.setText(newConsulta.getTratamiento().nombre());
+                IntroducirDuracion.setText(newConsulta.getTratamiento().duracion());
+                IntroducirMedicamento.setText(newConsulta.getTratamiento().medicamento());
             } else {
                 limpiarCampos();
             }
@@ -57,13 +74,17 @@ public class ConsultaViewController implements Initializable {
         }
 
         String motivo = IntroducirMotivo.getText();
-        String tratamiento = IntroducirTratamiento.getText();
-        if (motivo.isEmpty() || tratamiento.isEmpty()) {
+        String idTratamiento = IntroducirIDTratamiento.getText();
+        String nombreTratamiento = IntroducirNombreTratamiento.getText();
+        String duracionTratamiento = IntroducirDuracion.getText();
+        String medicamentoTratamiento = IntroducirMedicamento.getText();
+
+        if (motivo.isEmpty() || idTratamiento.isEmpty() || nombreTratamiento.isEmpty() || duracionTratamiento.isEmpty() || medicamentoTratamiento.isEmpty()) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error", "Todos los campos de la consulta son obligatorios.");
             return;
         }
 
-        consultaController.crearNuevaConsulta(citaSeleccionada, motivo, tratamiento);
+        consultaController.crearNuevaConsulta(citaSeleccionada.getFecha(), citaSeleccionada.getIDCita(), citaSeleccionada.getHora(), motivo, idTratamiento, nombreTratamiento, duracionTratamiento, citaSeleccionada);
         limpiarCampos();
         mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Consulta creada exitosamente.");
     }
@@ -87,7 +108,10 @@ public class ConsultaViewController implements Initializable {
             IntroducirFecha.setText(selectedItem.getFecha());
             IntroducirHora.setText(selectedItem.getHora());
             IntroducirMotivo.setText(selectedItem.getMotivo());
-            IntroducirTratamiento.setText(selectedItem.getTratamiento());
+            IntroducirIDTratamiento.setText(selectedItem.getTratamiento().ID());
+            IntroducirNombreTratamiento.setText(selectedItem.getTratamiento().nombre());
+            IntroducirDuracion.setText(selectedItem.getTratamiento().duracion());
+            IntroducirMedicamento.setText(selectedItem.getTratamiento().medicamento());
         } else {
             mostrarAlerta(Alert.AlertType.ERROR, "Error", "Por favor, seleccione una consulta para leer.");
         }
@@ -98,8 +122,12 @@ public class ConsultaViewController implements Initializable {
         Consulta selectedItem = ListConsultasRealizadas.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             String nuevoMotivo = IntroducirMotivo.getText();
-            String nuevoTratamiento = IntroducirTratamiento.getText();
-            consultaController.actualizarConsulta(selectedItem, nuevoMotivo, nuevoTratamiento);
+            String nuevoIDTratamiento = IntroducirIDTratamiento.getText();
+            String nuevoNombreTratamiento = IntroducirNombreTratamiento.getText();
+            String nuevaDuracionTratamiento = IntroducirDuracion.getText();
+            String nuevoMedicamentoTratamiento = IntroducirMedicamento.getText();
+
+            consultaController.actualizarConsulta(selectedItem, nuevoMotivo, nuevoIDTratamiento, nuevoNombreTratamiento, nuevaDuracionTratamiento, nuevoMedicamentoTratamiento);
             ListConsultasRealizadas.refresh();
             mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Consulta modificada.");
         } else {
@@ -111,7 +139,10 @@ public class ConsultaViewController implements Initializable {
         IntroducirFecha.clear();
         IntroducirHora.clear();
         IntroducirMotivo.clear();
-        IntroducirTratamiento.clear();
+        IntroducirIDTratamiento.clear();
+        IntroducirNombreTratamiento.clear();
+        IntroducirDuracion.clear();
+        IntroducirMedicamento.clear();
     }
 
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
@@ -120,5 +151,9 @@ public class ConsultaViewController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+    @FXML
+    public void volverAtras() throws IOException {
+        App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/citas.fxml");
     }
 }

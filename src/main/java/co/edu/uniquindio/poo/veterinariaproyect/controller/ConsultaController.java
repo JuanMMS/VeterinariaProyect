@@ -3,39 +3,29 @@ package co.edu.uniquindio.poo.veterinariaproyect.controller;
 import co.edu.uniquindio.poo.veterinariaproyect.App;
 import co.edu.uniquindio.poo.veterinariaproyect.model.Cita;
 import co.edu.uniquindio.poo.veterinariaproyect.model.Consulta;
+import co.edu.uniquindio.poo.veterinariaproyect.model.Tratamiento;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import java.util.List;
 
 public class ConsultaController {
 
-    // Este método debería obtener la lista de consultas desde tu modelo central (App o Clinica)
     public ObservableList<Consulta> obtenerTodasLasConsultas() {
-        // Ejemplo: retornar una lista de consultas de la clínica
-        return App.clinica1.getListConsultas();
+        List<Consulta> consultas = App.clinica1.getListConsultas();
+        return FXCollections.observableArrayList(consultas);
     }
 
-    // Este método debería obtener la lista de citas disponibles desde tu modelo central
     public ObservableList<Cita> obtenerCitasDisponibles() {
-        // Ejemplo: retornar una lista de citas
-        return App.clinica1.getListCitas();
+        List<Cita> citas = App.clinica1.getListCitas();
+        return FXCollections.observableArrayList(citas);
     }
 
-    public void crearNuevaConsulta(Cita citaBase, String motivo, String tratamiento) {
-        // Se crea la consulta usando el constructor
-        Consulta nuevaConsulta = new Consulta(
-                citaBase.getIDCita(),
-                citaBase.getFecha(),
-                citaBase.getHora(),
-                citaBase.getLugarCita(),
-                citaBase.getVeterinario(),
-                citaBase.getMascota(),
-                citaBase.getPropietario(),
-                citaBase.getPersonalApoyo(),
-                motivo,
-                tratamiento
-        );
+    public void crearNuevaConsulta(String fecha, String hora, String motivo, String idTratamiento, String nombreTratamiento, String duracionTratamiento, String medicamentoTratamiento, Cita citaBase) {
+        Tratamiento nuevoTratamiento = new Tratamiento(idTratamiento, nombreTratamiento, duracionTratamiento, medicamentoTratamiento);
 
-        // Se añade la consulta a la lista principal en tu modelo
+        // Aquí se llama al nuevo constructor con los 6 argumentos
+        Consulta nuevaConsulta = new Consulta(fecha, citaBase.getIDCita(), hora, motivo, citaBase, nuevoTratamiento);
+
         App.clinica1.getListConsultas().add(nuevaConsulta);
     }
 
@@ -43,8 +33,9 @@ public class ConsultaController {
         App.clinica1.getListConsultas().remove(consulta);
     }
 
-    public void actualizarConsulta(Consulta consultaOriginal, String nuevoMotivo, String nuevoTratamiento) {
+    public void actualizarConsulta(Consulta consultaOriginal, String nuevoMotivo, String nuevoIDTratamiento, String nuevoNombreTratamiento, String nuevaDuracionTratamiento, String nuevoMedicamentoTratamiento) {
         consultaOriginal.setMotivo(nuevoMotivo);
-        consultaOriginal.setTratamiento(nuevoTratamiento);
+        // Crea un nuevo Tratamiento record y lo asigna
+        consultaOriginal.setTratamiento(new Tratamiento(nuevoIDTratamiento, nuevoNombreTratamiento, nuevaDuracionTratamiento, nuevoMedicamentoTratamiento));
     }
 }
