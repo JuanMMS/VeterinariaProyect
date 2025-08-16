@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="316.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.TratamientoViewController">
+<AnchorPane prefHeight="316.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.TratamientoViewController">
    <children>
       <Label layoutX="66.0" layoutY="14.0" prefHeight="88.0" prefWidth="383.0" text="Información del tratamiento">
          <font>
