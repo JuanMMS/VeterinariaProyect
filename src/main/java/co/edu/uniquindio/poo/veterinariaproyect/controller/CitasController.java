@@ -1,33 +1,41 @@
 package co.edu.uniquindio.poo.veterinariaproyect.controller;
 
 import co.edu.uniquindio.poo.veterinariaproyect.App;
-import co.edu.uniquindio.poo.veterinariaproyect.model.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import co.edu.uniquindio.poo.veterinariaproyect.model.Cita;
+import co.edu.uniquindio.poo.veterinariaproyect.model.LugarCita;
+import co.edu.uniquindio.poo.veterinariaproyect.model.Veterinario;
+import co.edu.uniquindio.poo.veterinariaproyect.model.Mascota;
+import co.edu.uniquindio.poo.veterinariaproyect.model.Propietario;
+import co.edu.uniquindio.poo.veterinariaproyect.model.PersonalApoyo;
 import java.util.List;
-
+import java.util.Optional;
 public class CitasController {
 
-    public ObservableList<Cita> obtenerTodasLasCitas() {
-        List<Cita> citas = App.clinica1.getListCitas();
-        return FXCollections.observableArrayList(citas);
+    public List<Cita> obtenerTodasLasCitas() {
+        return App.clinica1.getListCitas();
     }
 
-    // Este método ahora devuelve un booleano para indicar si la cita se agregó o no.
-    public boolean crearNuevaCita(String id, String fecha, String hora, LugarCita lugarCita, Veterinario veterinario, Mascota mascota, Propietario propietario, PersonalApoyo personalApoyo) {
-        Cita nuevaCita = new Cita(id, fecha, hora, lugarCita, veterinario, mascota, propietario, personalApoyo);
+    public Cita crearNuevaCita(String idCita, String fecha, String hora, LugarCita lugarCita, Veterinario veterinario, Mascota mascota, Propietario propietario, PersonalApoyo personalApoyo) {
+        // Verifica si ya existe una cita con el mismo ID.
+        Optional<Cita> citaExistente = App.clinica1.getListCitas().stream()
+                .filter(c -> c.getIDCita().equals(idCita))
+                .findFirst();
 
-        // agendarCita devuelve true si se agrega, y false si hay un duplicado.
-        boolean citaAgendada = personalApoyo.agendarCita(nuevaCita, App.clinica1);
+        if (citaExistente.isPresent()) {
+            return null; // Retorna null si la cita ya existe.
+        }
 
-        return citaAgendada;
+        Cita nuevaCita = new Cita(idCita, fecha, hora, lugarCita, veterinario, mascota, propietario, personalApoyo);
+        App.clinica1.getListCitas().add(nuevaCita);
+        return nuevaCita; // Retorna el objeto Cita recién creado.
     }
 
     public void eliminarCita(Cita cita) {
-        App.clinica1.eliminarCitas(cita);
+        App.clinica1.getListCitas().remove(cita);
     }
 
     public void actualizarCita(Cita citaOriginal, String nuevaFecha, String nuevaHora, LugarCita nuevoLugar, Veterinario nuevoVeterinario, Mascota nuevaMascota, Propietario nuevoPropietario, PersonalApoyo nuevoPersonalApoyo, String nuevoID) {
+        citaOriginal.setIDCita(nuevoID);
         citaOriginal.setFecha(nuevaFecha);
         citaOriginal.setHora(nuevaHora);
         citaOriginal.setLugarCita(nuevoLugar);
@@ -35,6 +43,5 @@ public class CitasController {
         citaOriginal.setMascota(nuevaMascota);
         citaOriginal.setPropietario(nuevoPropietario);
         citaOriginal.setPersonalApoyo(nuevoPersonalApoyo);
-        citaOriginal.setIDCita(nuevoID);
     }
 }

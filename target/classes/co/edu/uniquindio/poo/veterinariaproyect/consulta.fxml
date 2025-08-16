@@ -8,7 +8,7 @@
    <children>
       <ToolBar layoutX="300.0" layoutY="346.0" prefHeight="40.0" prefWidth="266.0">
         <items>
-          <Button mnemonicParsing="false" onAction="#BotonAceptar" text="Aceptar" />
+          <Button mnemonicParsing="false" onAction="#BotonAceptar" text="Siguiente" />
             <Button layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#BotonEliminar" text="Eliminar" />
             <Button layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#BotonLeer" text="Leer" />
             <Button layoutX="125.0" layoutY="13.0" mnemonicParsing="false" onAction="#BotonModificar" text="Modificar" />
@@ -37,7 +37,7 @@
       </Label>
       <TextField fx:id="IntroducirHora" layoutX="391.0" layoutY="142.0" />
       <TextArea fx:id="IntroducirMotivo" layoutX="303.0" layoutY="218.0" prefHeight="117.0" prefWidth="277.0" />
-      <ListView id="ListCitas" fx:id="ListCitas" layoutX="23.0" layoutY="120.0" prefHeight="236.0" prefWidth="212.0" />
+      <ListView id="ListCitasDisponibles" fx:id="ListCitasDisponibles" layoutX="16.0" layoutY="120.0" prefHeight="236.0" prefWidth="257.0" />
       <Label layoutX="12.0" layoutY="80.0" text="Seleccione la cita de entre la lista">
          <font>
             <Font size="16.0" />
