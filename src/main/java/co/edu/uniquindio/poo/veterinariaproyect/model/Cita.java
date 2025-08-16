@@ -149,6 +149,7 @@ public class Cita {
     public String getNombrePersonalApoyo() {
         return (personalApoyo != null) ? personalApoyo.getNombre() : "N/A";
     }
+
 }
 
 
