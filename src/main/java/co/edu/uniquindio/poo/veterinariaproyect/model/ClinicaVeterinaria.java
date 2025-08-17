@@ -217,18 +217,16 @@ public class ClinicaVeterinaria {
         return citasEncontradas;
 }
 
-    public boolean agendarCita(Cita cita, ClinicaVeterinaria clinicaVeterinaria) {
-        for (Cita citaExistente : clinicaVeterinaria.getListCitas()) {
-            boolean mismaFecha = citaExistente.getFecha().equals(cita.getFecha());
-            boolean mismaHora = citaExistente.getHora().equals(cita.getHora());
-            boolean mismaSede = citaExistente.getLugarCita() == cita.getLugarCita();
-
-            if (mismaFecha && mismaHora && mismaSede) {
-                return false;
-            }
-        }
-        clinicaVeterinaria.getListCitas().add(cita);
-        return true;
+    @Override
+    public String toString() {
+        return "ClinicaVeterinaria{" +
+                "nombre='" + nombre + '\'' +
+                ", ID='" + ID + '\'' +
+                ", listPersonas=" + listPersonas +
+                ", listMascotas=" + listMascotas +
+                ", listConsultas=" + listConsultas +
+                ", listCitas=" + listCitas +
+                ", listTratamientos=" + listTratamientos +
+                '}';
     }
-
 }

@@ -49,18 +49,16 @@ public class CitasViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.citasController = new CitasController();
-        this.listCitasObservable = citasController.obtenerTodasLasCitas();
+        this.listCitasObservable = FXCollections.observableArrayList(citasController.obtenerTodasLasCitas());
 
         columnaID.setCellValueFactory(new PropertyValueFactory<>("IDCita"));
         columnaFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         columnaHora.setCellValueFactory(new PropertyValueFactory<>("hora"));
         columnaLugar.setCellValueFactory(new PropertyValueFactory<>("lugarCita"));
-
         columnaVeterinario.setCellValueFactory(new PropertyValueFactory<>("nombreVeterinario"));
         columnaMascota.setCellValueFactory(new PropertyValueFactory<>("nombreMascota"));
         columnaPropietario.setCellValueFactory(new PropertyValueFactory<>("nombrePropietario"));
         columnaPersonalApoyo.setCellValueFactory(new PropertyValueFactory<>("nombrePersonalApoyo"));
-
         tablaCitas.setItems(listCitasObservable);
 
         seleccionarLugar.setItems(FXCollections.observableArrayList(LugarCita.values()));
@@ -69,17 +67,17 @@ public class CitasViewController implements Initializable {
         ObservableList<Persona> allPersonasObservable = FXCollections.observableArrayList(allPersonasList);
 
         ObservableList<Veterinario> veterinarios = allPersonasObservable.stream()
-                .filter(p -> "Veterinario".equals(p.getRol()))
+                .filter(p -> p instanceof Veterinario)
                 .map(p -> (Veterinario) p)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
         ObservableList<Propietario> propietarios = allPersonasObservable.stream()
-                .filter(p -> "Propietario".equals(p.getRol()))
+                .filter(p -> p instanceof Propietario)
                 .map(p -> (Propietario) p)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
         ObservableList<PersonalApoyo> personalApoyo = allPersonasObservable.stream()
-                .filter(p -> "Personal Apoyo".equals(p.getRol()))
+                .filter(p -> p instanceof PersonalApoyo)
                 .map(p -> (PersonalApoyo) p)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
@@ -94,8 +92,11 @@ public class CitasViewController implements Initializable {
                 return vet != null ? vet.getNombre() : "";
             }
             @Override
-            public Veterinario fromString(String string) {
-                return null;
+            public Veterinario fromString(String nombre) {
+                return veterinarios.stream()
+                        .filter(v -> v.getNombre().equals(nombre))
+                        .findFirst()
+                        .orElse(null);
             }
         });
 
@@ -105,8 +106,11 @@ public class CitasViewController implements Initializable {
                 return mascota != null ? mascota.getNombre() : "";
             }
             @Override
-            public Mascota fromString(String string) {
-                return null;
+            public Mascota fromString(String nombre) {
+                return seleccionarMascota.getItems().stream()
+                        .filter(m -> m.getNombre().equals(nombre))
+                        .findFirst()
+                        .orElse(null);
             }
         });
 
@@ -116,8 +120,11 @@ public class CitasViewController implements Initializable {
                 return prop != null ? prop.getNombre() : "";
             }
             @Override
-            public Propietario fromString(String string) {
-                return null;
+            public Propietario fromString(String nombre) {
+                return propietarios.stream()
+                        .filter(p -> p.getNombre().equals(nombre))
+                        .findFirst()
+                        .orElse(null);
             }
         });
 
@@ -127,8 +134,11 @@ public class CitasViewController implements Initializable {
                 return pa != null ? pa.getNombre() : "";
             }
             @Override
-            public PersonalApoyo fromString(String string) {
-                return null;
+            public PersonalApoyo fromString(String nombre) {
+                return personalApoyo.stream()
+                        .filter(p -> p.getNombre().equals(nombre))
+                        .findFirst()
+                        .orElse(null);
             }
         });
 
@@ -164,18 +174,14 @@ public class CitasViewController implements Initializable {
             return;
         }
 
-        boolean citaAgregada = citasController.crearNuevaCita(idCita, fecha, hora, lugarCita, veterinario, mascota, propietario, personalApoyo);
+        Cita nuevaCita = citasController.crearNuevaCita(idCita, fecha, hora, lugarCita, veterinario, mascota, propietario, personalApoyo);
 
-        if (citaAgregada) {
-            // Si la cita se agregó exitosamente al modelo, actualiza la lista observable
-            listCitasObservable = citasController.obtenerTodasLasCitas();
-            tablaCitas.setItems(listCitasObservable);
-
+        if (nuevaCita != null) {
+            listCitasObservable.add(nuevaCita);
             limpiarCampos();
             mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Cita agregada exitosamente.");
         } else {
-            // Si la cita no se agregó (por duplicidad), muestra una alerta de error
-            mostrarAlerta(Alert.AlertType.ERROR, "Error", "Datos duplicados. Ya existe una cita con los mismos parámetros.");
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "La cita no se pudo agregar. Verifique los datos o si ya existe.");
         }
     }
 
@@ -184,11 +190,7 @@ public class CitasViewController implements Initializable {
         Cita selectedItem = tablaCitas.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             citasController.eliminarCita(selectedItem);
-
-            // Refresca la lista observable después de eliminar
-            listCitasObservable = citasController.obtenerTodasLasCitas();
-            tablaCitas.setItems(listCitasObservable);
-
+            listCitasObservable.remove(selectedItem);
             limpiarCampos();
             mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Cita eliminada.");
         } else {
@@ -227,6 +229,7 @@ public class CitasViewController implements Initializable {
             PersonalApoyo nuevoPersonalApoyo = seleccionarPersonalApoyo.getValue();
 
             citasController.actualizarCita(selectedItem, nuevaFecha, nuevaHora, nuevoLugar, nuevoVeterinario, nuevaMascota, nuevoPropietario, nuevoPersonalApoyo, nuevoID);
+
             tablaCitas.refresh();
             mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Cita modificada.");
         } else {
@@ -239,12 +242,15 @@ public class CitasViewController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("consulta.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Gestión de Consultas");
             stage.show();
-        } catch (Exception e) {
+            // Cierra la ventana actual de Citas, si es deseado
+            // ((Node) event.getSource()).getScene().getWindow().hide();
+        } catch (IOException e) {
             e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "No se pudo cargar la ventana de consultas.");
         }
     }
 
@@ -269,6 +275,6 @@ public class CitasViewController implements Initializable {
 
     @FXML
     public void volverAtras() throws IOException {
-        App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/menu.fxml");
+        App.cambiarEscena("menu.fxml");
     }
 }

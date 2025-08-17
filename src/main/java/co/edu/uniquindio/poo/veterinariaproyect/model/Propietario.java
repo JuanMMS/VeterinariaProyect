@@ -29,4 +29,10 @@ public class Propietario extends Persona {
         return "Propietario";
     }
 
+    @Override
+    public String toString() {
+        return "Propietario{" +
+                "direccion='" + direccion + '\'' +
+                '}';
+    }
 }
