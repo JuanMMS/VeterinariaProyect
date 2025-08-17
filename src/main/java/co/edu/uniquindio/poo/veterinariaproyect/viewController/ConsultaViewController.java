@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ListCell;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,16 +20,16 @@ import javafx.fxml.Initializable;
 
 public class ConsultaViewController implements Initializable {
 
-    @FXML private ListView<Cita> ListCitasDisponibles;
+    @FXML private ListView<Cita> listCitasDisponibles;
     @FXML private ListView<Consulta> ListConsultasRealizadas;
     @FXML private TextField IntroducirFecha;
     @FXML private TextField IntroducirHora;
     @FXML private TextArea IntroducirMotivo;
 
-    @FXML private TextField IntroducirIDTratamiento; // Nuevo campo para el ID del tratamiento
-    @FXML private TextField IntroducirNombreTratamiento; // Nuevo campo para el nombre
-    @FXML private TextField IntroducirDuracion; // Nuevo campo para la duración
-    @FXML private TextField IntroducirMedicamento; // Nuevo campo para el medicamento
+    @FXML private TextField IntroducirIDTratamiento;
+    @FXML private TextField IntroducirNombreTratamiento;
+    @FXML private TextField IntroducirDuracion;
+    @FXML private TextField IntroducirMedicamento;
 
     private ConsultaController consultaController;
     private ObservableList<Consulta> listaConsultasObservable;
@@ -35,12 +37,48 @@ public class ConsultaViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.consultaController = new ConsultaController();
-        this.listaConsultasObservable = consultaController.obtenerTodasLasConsultas();
+        this.listaConsultasObservable = consultaController.getListaConsultas();
 
-        ListCitasDisponibles.setItems(consultaController.obtenerCitasDisponibles());
+        // Configuración de CellFactory para Citas Disponibles
+        listCitasDisponibles.setCellFactory(new Callback<ListView<Cita>, ListCell<Cita>>() {
+            @Override
+            public ListCell<Cita> call(ListView<Cita> param) {
+                return new ListCell<Cita>() {
+                    @Override
+                    protected void updateItem(Cita cita, boolean empty) {
+                        super.updateItem(cita, empty);
+                        if (empty || cita == null) {
+                            setText(null);
+                        } else {
+                            setText("Cita con " + cita.getMascota().getNombre() + " (" + cita.getFecha() + ")");
+                        }
+                    }
+                };
+            }
+        });
+        listCitasDisponibles.setItems(consultaController.obtenerCitasDisponibles());
+
+        // Configuración de CellFactory para Consultas Realizadas
+        ListConsultasRealizadas.setCellFactory(new Callback<ListView<Consulta>, ListCell<Consulta>>() {
+            @Override
+            public ListCell<Consulta> call(ListView<Consulta> param) {
+                return new ListCell<Consulta>() {
+                    @Override
+                    protected void updateItem(Consulta consulta, boolean empty) {
+                        super.updateItem(consulta, empty);
+                        if (empty || consulta == null) {
+                            setText(null);
+                        } else {
+                            setText("Consulta ID: " + consulta.getCita().getIDCita() + " (" + consulta.getFecha() + ")");
+                        }
+                    }
+                };
+            }
+        });
         ListConsultasRealizadas.setItems(listaConsultasObservable);
 
-        ListCitasDisponibles.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newCita) -> {
+        // Listener para la ListView de Citas
+        listCitasDisponibles.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newCita) -> {
             if (newCita != null) {
                 IntroducirFecha.setText(newCita.getFecha());
                 IntroducirHora.setText(newCita.getHora());
@@ -50,6 +88,7 @@ public class ConsultaViewController implements Initializable {
             }
         });
 
+        // Listener para la ListView de Consultas
         ListConsultasRealizadas.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newConsulta) -> {
             if (newConsulta != null) {
                 IntroducirFecha.setText(newConsulta.getFecha());
@@ -67,7 +106,7 @@ public class ConsultaViewController implements Initializable {
 
     @FXML
     public void BotonAceptar() {
-        Cita citaSeleccionada = ListCitasDisponibles.getSelectionModel().getSelectedItem();
+        Cita citaSeleccionada = listCitasDisponibles.getSelectionModel().getSelectedItem();
         if (citaSeleccionada == null) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error", "Por favor, seleccione una cita para crear una consulta.");
             return;
@@ -152,6 +191,7 @@ public class ConsultaViewController implements Initializable {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+
     @FXML
     public void volverAtras() throws IOException {
         App.cambiarEscena("/co/edu/uniquindio/poo/veterinariaproyect/citas.fxml");
