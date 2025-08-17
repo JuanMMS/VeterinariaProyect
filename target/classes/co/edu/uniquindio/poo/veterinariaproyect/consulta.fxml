@@ -1,113 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.ConsultaViewController">
 
-<VBox alignment="CENTER" prefHeight="690.0" prefWidth="638.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.ConsultaViewController">
-
-   <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Gestión de Consultas" />
+   <Label text="Gestión de Consultas" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
 
    <HBox alignment="CENTER" spacing="20.0">
       <VBox spacing="10.0">
-         <Label text="Citas Disponibles" />
-         <ListView fx:id="listCitasDisponibles" prefHeight="200.0" prefWidth="250.0" />
+         <Label text="Citas Disponibles"/>
+         <ListView fx:id="listCitasDisponibles" prefHeight="200.0" prefWidth="250.0"/>
       </VBox>
 
       <VBox spacing="10.0">
-         <Label text="Consultas Realizadas" />
-         <ListView fx:id="ListConsultasRealizadas" prefHeight="200.0" prefWidth="250.0" />
+         <Label text="Consultas Realizadas"/>
+         <ListView fx:id="ListConsultasRealizadas" prefHeight="200.0" prefWidth="250.0"/>
       </VBox>
    </HBox>
 
-   <GridPane alignment="CENTER" hgap="10" vgap="10">
-      <Label text="Fecha:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-      <TextField fx:id="IntroducirFecha" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+   <GridPane hgap="10" vgap="10" alignment="CENTER">
+      <Label text="Fecha:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+      <TextField fx:id="IntroducirFecha" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
-      <Label text="Hora:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-      <TextField fx:id="IntroducirHora" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="Hora:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+      <TextField fx:id="IntroducirHora" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-      <Label text="Motivo:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-      <TextArea fx:id="IntroducirMotivo" prefHeight="80.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label text="Motivo:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+      <TextArea fx:id="IntroducirMotivo" prefHeight="80.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-      <Label text="ID Tratamiento:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-      <TextField fx:id="IntroducirIDTratamiento" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Label text="ID Tratamiento:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+      <TextField fx:id="IntroducirIDTratamiento" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
-      <Label text="Nombre Tratamiento:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-      <TextField fx:id="IntroducirNombreTratamiento" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Label text="Nombre Tratamiento:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+      <TextField fx:id="IntroducirNombreTratamiento" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-      <Label text="Duración:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-      <TextField fx:id="IntroducirDuracion" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Label text="Duración:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+      <TextField fx:id="IntroducirDuracion" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-      <Label text="Medicamento:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-      <TextField fx:id="IntroducirMedicamento" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <columnConstraints>
-         <ColumnConstraints />
-         <ColumnConstraints />
-      </columnConstraints>
-      <rowConstraints>
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-      </rowConstraints>
+      <Label text="Medicamento:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+      <TextField fx:id="IntroducirMedicamento" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
    </GridPane>
 
    <HBox alignment="CENTER" spacing="10.0">
-      <Button onAction="#BotonAceptar" text="Aceptar" />
-      <Button onAction="#BotonEliminar" text="Eliminar" />
-      <Button onAction="#BotonLeer" text="Leer" />
-      <Button onAction="#BotonModificar" text="Modificar" />
+      <Button text="Aceptar" onAction="#BotonAceptar"/>
+      <Button text="Eliminar" onAction="#BotonEliminar"/>
+      <Button text="Leer" onAction="#BotonLeer"/>
+      <Button text="Modificar" onAction="#BotonModificar"/>
    </HBox>
 
-   <Button onAction="#volverAtras" text="Volver Atrás" />
+   <Button text="Volver Atrás" onAction="#volverAtras"/>
 </VBox>
-
-<?import javafx.scene.text.*?>
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.veterinariaproyect.viewController.ConsultaViewController">
-   <children>
-      <ToolBar layoutX="300.0" layoutY="346.0" prefHeight="40.0" prefWidth="266.0">
-        <items>
-          <Button mnemonicParsing="false" onAction="#BotonAceptar" text="Siguiente" />
-            <Button layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#BotonEliminar" text="Eliminar" />
-            <Button layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#BotonLeer" text="Leer" />
-            <Button layoutX="125.0" layoutY="13.0" mnemonicParsing="false" onAction="#BotonModificar" text="Modificar" />
-        </items>
-      </ToolBar>
-      <Label layoutX="301.0" layoutY="92.0" text="Fecha:">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label layoutX="305.0" layoutY="139.0" text="Hora:">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label layoutX="403.0" layoutY="184.0" text="Motivo:">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <TextField fx:id="IntroducirFecha" layoutX="391.0" layoutY="95.0" />
-      <Label layoutX="163.0" layoutY="14.0" text="Control de consulta">
-         <font>
-            <Font size="32.0" />
-         </font>
-      </Label>
-      <TextField fx:id="IntroducirHora" layoutX="391.0" layoutY="142.0" />
-      <TextArea fx:id="IntroducirMotivo" layoutX="303.0" layoutY="218.0" prefHeight="117.0" prefWidth="277.0" />
-      <ListView id="ListCitasDisponibles" fx:id="ListCitasDisponibles" layoutX="16.0" layoutY="120.0" prefHeight="236.0" prefWidth="257.0" />
-      <Label layoutX="12.0" layoutY="80.0" text="Seleccione la cita de entre la lista">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Button fx:id="botonVolver" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#volverAtras" text="Volver" />
-   </children>
-</AnchorPane>
-
